@@ -201,9 +201,9 @@
         <!-- Resume Import UI (local-only processing) -->
         <div class="row s-resume__section" id="resume-import-ui">
             <div class="column large-12 tab-12">
-                <h3 class="section-header-allcaps">Import from JSON</h3>
-                <p>Load your LinkedIn export (Profile JSON) or a site <code>profile.json</code> to populate this page. Processing happens locally in your browser.</p>
-                <input type="file" id="resume-file-input" accept="application/json">
+                <h3 class="section-header-allcaps">Import from LinkedIn (ZIP/CSV/JSON)</h3>
+                <p>Load your LinkedIn Basic Data Export ZIP (recommended), individual CSVs (Positions/Education/Skills), or a site <code>profile.json</code>. All processing happens locally in your browser.</p>
+                <input type="file" id="resume-file-input" accept=".json,.zip,.csv,application/json,application/zip,text/csv">
                 <button class="btn btn--small" id="resume-import-btn">Import</button>
                 <button class="btn btn--small btn--stroke" id="resume-download-btn">Download mapped profile.json</button>
                 <small id="resume-import-status" style="display:block;margin-top:0.8rem" aria-live="polite"></small>
@@ -612,10 +612,13 @@
   </footer>
 
 
-  <!-- Java Script
-  ================================================== -->
-    <script defer src="js/plugins.js"></script>
-    <script defer src="js/main.js"></script>
+        <!-- Java Script
+    ================================================== -->
+        <!-- CSV/ZIP parsing libs for LinkedIn import -->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script defer src="js/plugins.js"></script>
+        <script defer src="js/main.js"></script>
 
 </body>
 

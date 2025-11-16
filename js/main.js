@@ -451,7 +451,7 @@
 
         }; // end ssResumeImport
 
-       /* Resume Upload UI (LinkedIn export or site profile.json)
+       /* Resume Upload UI (LinkedIn export ZIP/CSV or site profile.json)
         * ------------------------------------------------------ */
         const ssResumeUpload = function() {
             const fileInput = document.getElementById('resume-file-input');
@@ -472,6 +472,156 @@
                 const y = String(obj.year);
                 const m = obj.month ? pad2(parseInt(obj.month,10)) : null;
                 return m ? (y + '-' + m) : y;
+            };
+
+            // --- CSV helpers ---
+            const monthNum = function(m){
+                if (!m) return null;
+                const s = String(m).trim().toLowerCase();
+                const map = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,sept:9,oct:10,nov:11,dec:12};
+                if (/^\d+$/.test(s)) return Math.max(1, Math.min(12, parseInt(s,10)));
+                return map[s.slice(0,3)] || null;
+            };
+            const normDate = function(val){
+                if (!val) return null;
+                const t = String(val).trim();
+                if (!t || /present/i.test(t)) return null;
+                // YYYY or YYYY-MM
+                if (/^\d{4}(-\d{1,2})?$/.test(t)) {
+                    return t.replace(/-(\d)$/,'-0$1');
+                }
+                // MMM YYYY
+                let m = t.match(/([A-Za-z]{3,9})\s+(\d{4})/);
+                if (m) {
+                    const mm = monthNum(m[1]);
+                    return mm ? (m[2] + '-' + pad2(mm)) : m[2];
+                }
+                // M/D/YYYY or M/YYYY
+                m = t.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);
+                if (m) {
+                    const yy = m[3].length === 2 ? ('20' + m[3]) : m[3];
+                    return yy + '-' + pad2(parseInt(m[1],10));
+                }
+                m = t.match(/^(\d{1,2})[\/\-](\d{4})$/);
+                if (m) return m[2] + '-' + pad2(parseInt(m[1],10));
+                // Fallback: just year if looks like it
+                m = t.match(/(\d{4})/);
+                return m ? m[1] : null;
+            };
+            const getField = function(row, candidates){
+                const lowerMap = {};
+                Object.keys(row || {}).forEach(function(k){ lowerMap[k.toLowerCase()] = row[k]; });
+                for (let i=0;i<candidates.length;i++) {
+                    const key = candidates[i].toLowerCase();
+                    if (lowerMap.hasOwnProperty(key)) return lowerMap[key];
+                }
+                // fuzzy includes
+                const keys = Object.keys(lowerMap);
+                for (let i=0;i<candidates.length;i++) {
+                    const needle = candidates[i].toLowerCase();
+                    const hit = keys.find(function(k){ return k.indexOf(needle) !== -1; });
+                    if (hit) return lowerMap[hit];
+                }
+                return '';
+            };
+            const parseCSVText = function(text){
+                if (!window.Papa) throw new Error('PapaParse not loaded');
+                const res = Papa.parse(text, { header: true, skipEmptyLines: true });
+                return Array.isArray(res.data) ? res.data : [];
+            };
+
+            const mapPositionsCSV = function(rows){
+                return rows.map(function(r){
+                    const company = getField(r, ['Company Name','Company']);
+                    const title = getField(r, ['Title','Position','Role']);
+                    const location = getField(r, ['Location']);
+                    const desc = getField(r, ['Description','Summary']);
+                    const start = normDate(getField(r, ['Started On','Start Date','From','From Date']));
+                    let end = normDate(getField(r, ['Finished On','End Date','To','To Date']));
+                    const current = String(getField(r, ['Current Position','Currently Working Here'])).toLowerCase();
+                    if (!end && (current === 'true' || current === 'yes' || current === '1')) end = null;
+                    return { company: company || '', title: title || '', startDate: start || null, endDate: end || null, location: location || '', description: desc || '' };
+                });
+            };
+            const mapEducationCSV = function(rows){
+                return rows.map(function(r){
+                    const school = getField(r, ['School Name','University','Institution']);
+                    const degree = getField(r, ['Degree Name','Degree']);
+                    const field = getField(r, ['Field of Study','Field']);
+                    const start = normDate(getField(r, ['Start Date','From','From Date','Started On']));
+                    const end = normDate(getField(r, ['End Date','To','To Date','Finished On']));
+                    const summary = getField(r, ['Description']);
+                    return { school: school || '', degree: [degree, field].filter(Boolean).join(' • '), startDate: start || null, endDate: end || null, description: summary || '' };
+                });
+            };
+            const mapSkillsCSV = function(rows){
+                return rows.map(function(r){
+                    const name = getField(r, ['Name','Skill','Skill Name']);
+                    return { name: name || '', level: 75 };
+                }).filter(function(s){ return s.name; });
+            };
+
+            const buildProfileFromCSVBundle = function(bundle){
+                // bundle: { positions: rows|[], education: rows|[], skills: rows|[], profileSummary: rows|[], profile: rows|[], emails: rows|[], phones: rows|[] }
+                const exp = bundle.positions ? mapPositionsCSV(bundle.positions) : [];
+                const edu = bundle.education ? mapEducationCSV(bundle.education) : [];
+                const skills = bundle.skills ? mapSkillsCSV(bundle.skills) : [];
+
+                let summary = '';
+                if (bundle.profileSummary && bundle.profileSummary.length) {
+                    summary = getField(bundle.profileSummary[0], ['Summary','Profile Summary']) || '';
+                }
+                let contact = {};
+                if (bundle.profile && bundle.profile.length) {
+                    const p = bundle.profile[0];
+                    const first = getField(p, ['First Name']);
+                    const last = getField(p, ['Last Name']);
+                    const headline = getField(p, ['Headline']);
+                    const location = [getField(p, ['City','Location']), getField(p, ['Country'])].filter(Boolean).join(', ');
+                    contact = { name: [first, last].filter(Boolean).join(' '), title: headline || '', location: location || '' };
+                }
+                if (bundle.emails && bundle.emails.length) {
+                    contact.email = getField(bundle.emails[0], ['Email Address','Email']);
+                }
+                if (bundle.phones && bundle.phones.length) {
+                    contact.phone = getField(bundle.phones[0], ['Number','Phone Number']);
+                }
+
+                return { summary: summary, contact: contact, experience: exp, education: edu, skills: skills };
+            };
+
+            const parseLinkedInZip = async function(file){
+                if (!window.JSZip) throw new Error('JSZip not loaded');
+                const zip = await JSZip.loadAsync(file);
+                const readCSV = async function(pattern){
+                    const files = zip.file(new RegExp(pattern, 'i'));
+                    if (!files || !files.length) return null;
+                    const txt = await files[0].async('text');
+                    return parseCSVText(txt);
+                };
+                const positions = await readCSV('^Positions\\.csv$');
+                const education = await readCSV('^Education\\.csv$');
+                const skills = await readCSV('^Skills\\.csv$');
+                const profileSummary = await readCSV('^Profile Summary\\.csv$');
+                const profile = await readCSV('^Profile\\.csv$');
+                const emails = await readCSV('^Email Addresses\\.csv$');
+                const phones = await readCSV('^PhoneNumbers\\.csv$');
+                return buildProfileFromCSVBundle({ positions: positions||[], education: education||[], skills: skills||[], profileSummary: profileSummary||[], profile: profile||[], emails: emails||[], phones: phones||[] });
+            };
+
+            const parseSingleCSVFile = async function(file){
+                const text = await file.text();
+                const rows = parseCSVText(text);
+                const name = (file.name || '').toLowerCase();
+                const bundle = {};
+                if (name.indexOf('position') !== -1) bundle.positions = rows;
+                else if (name.indexOf('education') !== -1) bundle.education = rows;
+                else if (name.indexOf('skill') !== -1) bundle.skills = rows;
+                else if (name.indexOf('profile summary') !== -1) bundle.profileSummary = rows;
+                else if (name.indexOf('profile') !== -1) bundle.profile = rows;
+                else if (name.indexOf('email') !== -1) bundle.emails = rows;
+                else if (name.indexOf('phone') !== -1) bundle.phones = rows;
+                return buildProfileFromCSVBundle(bundle);
             };
 
             const findArrayByKey = function(obj, keys) {
@@ -526,30 +676,43 @@
                 return { experience: experience, education: education, skills: skills };
             };
 
-            importBtn.addEventListener('click', function(){
+            importBtn.addEventListener('click', async function(){
                 setStatus('');
                 const file = fileInput.files && fileInput.files[0];
-                if (!file) { setStatus('Please choose a JSON file first.'); return; }
-                const reader = new FileReader();
-                reader.onerror = function(){ setStatus('Could not read the file.'); };
-                reader.onload = function(evt){
-                    try {
-                        const json = JSON.parse(String(evt.target.result));
-                        // Detect profile format
-                        let profile;
+                if (!file) { setStatus('Please choose a ZIP, CSV, or JSON file.'); return; }
+
+                const name = (file.name || '').toLowerCase();
+                try {
+                    let profile = null;
+                    if (name.endsWith('.zip')) {
+                        setStatus('Reading ZIP…');
+                        profile = await parseLinkedInZip(file);
+                        const expCount = (profile.experience || []).length;
+                        const eduCount = (profile.education || []).length;
+                        const skCount = (profile.skills || []).length;
+                        setStatus('Imported ZIP ✓ — ' + expCount + ' roles, ' + eduCount + ' schools, ' + skCount + ' skills.');
+                    } else if (name.endsWith('.csv')) {
+                        setStatus('Parsing CSV…');
+                        profile = await parseSingleCSVFile(file);
+                        setStatus('Imported CSV ✓');
+                    } else {
+                        // Assume JSON
+                        const text = await file.text();
+                        const json = JSON.parse(String(text));
                         if (json && (Array.isArray(json.experience) || Array.isArray(json.education) || Array.isArray(json.skills))) {
                             profile = json; // already in site format
+                            setStatus('Imported profile.json ✓');
                         } else {
                             profile = mapLinkedInToProfile(json);
+                            setStatus('Imported LinkedIn JSON ✓');
                         }
-                        mappedProfileCache = profile;
-                        renderProfile(profile);
-                        setStatus('Imported successfully. You can now download mapped profile.json.');
-                    } catch (e) {
-                        setStatus('Invalid JSON file.');
                     }
-                };
-                reader.readAsText(file);
+                    mappedProfileCache = profile;
+                    renderProfile(profile);
+                } catch (e) {
+                    console.error(e);
+                    setStatus('Import failed: ' + (e && e.message ? e.message : 'Unknown error'));
+                }
             });
 
             downloadBtn.addEventListener('click', function(){
