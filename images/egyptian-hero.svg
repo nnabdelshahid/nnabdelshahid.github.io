@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="3000" height="2000" viewBox="0 0 3000 2000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylized Egyptian desert with pyramids at sunset">
+  <defs>
+    <linearGradient id="sky" x1="1500" y1="0" x2="1500" y2="2000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B3D91"/>
+      <stop offset="45%" stop-color="#1257B0"/>
+      <stop offset="70%" stop-color="#CFAE70"/>
+      <stop offset="100%" stop-color="#E7C888"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD27A"/>
+      <stop offset="100%" stop-color="#FF9E4A"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="1500" y1="1200" x2="1500" y2="2000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E7C888"/>
+      <stop offset="100%" stop-color="#CDAF7A"/>
+    </linearGradient>
+    <linearGradient id="pyramidLight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EED3A1"/>
+      <stop offset="100%" stop-color="#D6B57C"/>
+    </linearGradient>
+    <linearGradient id="pyramidShade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B8925C"/>
+      <stop offset="100%" stop-color="#8C6B3E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect x="0" y="0" width="3000" height="2000" fill="url(#sky)"/>
+
+  <!-- sun -->
+  <circle cx="2200" cy="650" r="180" fill="url(#sun)" opacity="0.9"/>
+  <circle cx="2200" cy="650" r="260" fill="url(#sun)" opacity="0.2"/>
+
+  <!-- distant dunes -->
+  <path d="M0 1200 C 400 1100, 900 1300, 1400 1200 C 1900 1100, 2400 1280, 3000 1180 L 3000 2000 L 0 2000 Z" fill="#E1C084" opacity="0.6"/>
+
+  <!-- foreground sand -->
+  <rect x="0" y="1200" width="3000" height="800" fill="url(#sand)"/>
+
+  <!-- big pyramid (center-left) -->
+  <g transform="translate(1150,850)">
+    <!-- left face (shade) -->
+    <polygon points="0,350 350,0 350,500" fill="url(#pyramidShade)"/>
+    <!-- right face (light) -->
+    <polygon points="350,0 700,350 350,500" fill="url(#pyramidLight)"/>
+  </g>
+
+  <!-- second pyramid (right) -->
+  <g transform="translate(1750,900) scale(0.75)">
+    <polygon points="0,350 350,0 350,500" fill="url(#pyramidShade)"/>
+    <polygon points="350,0 700,350 350,500" fill="url(#pyramidLight)"/>
+  </g>
+
+  <!-- third pyramid (far left, smaller) -->
+  <g transform="translate(800,980) scale(0.55)">
+    <polygon points="0,350 350,0 350,500" fill="url(#pyramidShade)"/>
+    <polygon points="350,0 700,350 350,500" fill="url(#pyramidLight)"/>
+  </g>
+
+  <!-- subtle Nile hint (a thin blue curve) -->
+  <path d="M0,1650 C 600,1550 1000,1700 1500,1630 C 2000,1560 2400,1750 3000,1680" stroke="#0B6FA4" stroke-width="8" opacity="0.25" fill="none"/>
+
+  <!-- grain texture overlay -->
+  <rect x="0" y="0" width="3000" height="2000" fill="#000" opacity="0.06"/>
+</svg>
