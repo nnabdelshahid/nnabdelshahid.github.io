@@ -48,6 +48,9 @@
     { "name": "Ruby on Rails", "level": 60 },
     { "name": "jQuery", "level": 65 }
   ],
+  "certifications": [],
+  "languages": [],
+  "honors": [],
   "caseStudies": [
     {
       "title": "Improved web app loading and responsiveness",
