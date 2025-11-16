@@ -335,6 +335,7 @@
                 careerEl: document.getElementById('career-container'),
                 educationEl: document.getElementById('education-container'),
                 skillsListEl: document.getElementById('skills-list'),
+                skillsContainerEl: document.getElementById('skills-container'),
                 certificationsEl: document.getElementById('certifications-container'),
                 languagesEl: document.getElementById('languages-container'),
                 honorsEl: document.getElementById('honors-container')
@@ -357,7 +358,7 @@
         };
 
         const renderProfile = function(profile) {
-            const { careerEl, educationEl, skillsListEl, certificationsEl, languagesEl, honorsEl } = getResumeContainers();
+            const { careerEl, educationEl, skillsListEl, skillsContainerEl, certificationsEl, languagesEl, honorsEl } = getResumeContainers();
             if (!(careerEl && educationEl && skillsListEl)) return;
 
             // Experience
@@ -423,22 +424,68 @@
                 educationEl.innerHTML = eduHTML;
             }
 
-            // Skills
-            if (skillsListEl) {
+            // Skills (grouped by category into columns)
+            (function(){
                 const skills = Array.isArray(profile.skills) ? profile.skills : [];
-                const items = skills.map(function(s){
-                    const lvl = Math.max(5, Math.min(100, (typeof s.level === 'number' ? s.level : 75)));
-                    const rounded = Math.round(lvl / 5) * 5; // match available CSS classes
-                    const cls = 'percent' + rounded;
-                    return (
-                        '<li>' +
-                          '<div class="progress ' + cls + '"></div>' +
-                          '<strong>' + (s.name || '') + '</strong>' +
-                        '</li>'
-                    );
-                }).join('');
-                if (items) skillsListEl.innerHTML = items;
-            }
+                if (!skills.length) return;
+
+                // Build categories by keyword matching
+                const cats = {
+                    Languages: [],
+                    Frameworks: [],
+                    Testing: [],
+                    Databases: [],
+                    DevOps: [],
+                    Tools: [],
+                    Mobile: [],
+                    Other: []
+                };
+
+                const push = function(cat, name){ if (name && !cats[cat].includes(name)) cats[cat].push(name); };
+                const pickCat = function(name){
+                    const n = String(name || '').toLowerCase();
+                    if (!n) return 'Other';
+                    if (/^html|css|sass|less|javascript|typescript|ruby|python|java|pl\/?sql|sql|r\b/.test(n)) return 'Languages';
+                    if (/react(\s|$)|reactjs|react-native|node\b|express\b|django|rails|bootstrap|angular|ionic|expo/.test(n)) return 'Frameworks';
+                    if (/jest|rspec|postman|cypress|mocha|chai/.test(n)) return 'Testing';
+                    if (/postgres|mysql|sqlite|mongo/.test(n)) return 'Databases';
+                    if (/aws|docker|kubernetes|heroku|netlify|ci\b|cd\b|github actions/.test(n)) return 'DevOps';
+                    if (/git|github|gitlab|bitbucket|trello|slack|vscode|xcode|intellij|pycharm|sourcetree|balsamiq|codepen|robo3t/.test(n)) return 'Tools';
+                    if (/react-native|ionic/.test(n)) return 'Mobile';
+                    return 'Other';
+                };
+
+                skills.forEach(function(s){
+                    const name = s && (s.name || s.title || s.toString());
+                    const cat = pickCat(name);
+                    push(cat, (name || '').replace(/\bjs\b/i, 'JS'));
+                });
+
+                // Prepare grid HTML
+                const catOrder = ['Languages','Frameworks','Mobile','Testing','Databases','DevOps','Tools','Other'];
+                const cols = catOrder
+                    .filter(function(k){ return cats[k] && cats[k].length; })
+                    .map(function(k){
+                        const items = cats[k].sort(function(a,b){ return a.localeCompare(b); })
+                            .map(function(n){ return '<li>' + n + '</li>'; }).join('');
+                        return (
+                            '<div class="skills-col">' +
+                              '<h4 class="h6">' + k + '</h4>' +
+                              '<ul class="disc">' + items + '</ul>' +
+                            '</div>'
+                        );
+                    }).join('');
+
+                const grid = '<div class="resume-block"><div class="skills-grid">' + cols + '</div></div>';
+
+                if (skillsContainerEl) {
+                    skillsContainerEl.innerHTML = grid;
+                } else if (skillsListEl) {
+                    // Fallback: show flat list if container missing
+                    const flat = Object.values(cats).flat().map(function(n){ return '<li><strong>' + n + '</strong></li>'; }).join('');
+                    skillsListEl.innerHTML = flat;
+                }
+            })();
 
             // Certifications
             if (certificationsEl && Array.isArray(profile.certifications)) {

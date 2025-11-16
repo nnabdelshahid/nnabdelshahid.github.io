@@ -4048,6 +4048,26 @@ input[type="button"].btn--primary:focus {
     margin-right: .2rem;
 }
 
+/* grouped skills grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--vspace-1_25);
+}
+.skills-col .h6 {
+    margin: 0 0 var(--vspace-0_5);
+    color: var(--color-text-light);
+}
+.skills-col ul {
+    margin-left: 1.2rem;
+}
+@media screen and (max-width: 1000px) {
+    .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media screen and (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+}
+
 /* -------------------------------------------------------------------
  * responsive:
  * resume
