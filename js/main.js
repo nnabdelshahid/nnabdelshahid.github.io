@@ -334,7 +334,10 @@
             return {
                 careerEl: document.getElementById('career-container'),
                 educationEl: document.getElementById('education-container'),
-                skillsListEl: document.getElementById('skills-list')
+                skillsListEl: document.getElementById('skills-list'),
+                certificationsEl: document.getElementById('certifications-container'),
+                languagesEl: document.getElementById('languages-container'),
+                honorsEl: document.getElementById('honors-container')
             };
         };
 
@@ -354,7 +357,7 @@
         };
 
         const renderProfile = function(profile) {
-            const { careerEl, educationEl, skillsListEl } = getResumeContainers();
+            const { careerEl, educationEl, skillsListEl, certificationsEl, languagesEl, honorsEl } = getResumeContainers();
             if (!(careerEl && educationEl && skillsListEl)) return;
 
             // Experience
@@ -435,6 +438,56 @@
                     );
                 }).join('');
                 if (items) skillsListEl.innerHTML = items;
+            }
+
+            // Certifications
+            if (certificationsEl && Array.isArray(profile.certifications)) {
+                const certHTML = profile.certifications.map(function(c){
+                    const dateRange = fmtRange(c.issueDate, c.expirationDate);
+                    const header = (
+                        '<div class="resume-block__header">' +
+                          '<h4 class="h3">' + (c.name || 'Certification') + '</h4>' +
+                          '<p class="resume-block__header-meta">' +
+                            '<span>' + (c.issuer || '') + '</span>' +
+                            '<span class="resume-block__header-date">' + dateRange + '</span>' +
+                          '</p>' +
+                        '</div>'
+                    );
+                    const details = [
+                        c.credentialId ? ('Credential ID: ' + c.credentialId) : '',
+                        c.credentialUrl ? ('<a href="' + c.credentialUrl + '" target="_blank" rel="noopener">Credential URL</a>') : ''
+                    ].filter(Boolean).join(' • ');
+                    return '<div class="resume-block">' + header + (details ? ('<p>' + details + '</p>') : '') + '</div>';
+                }).join('');
+                if (certHTML) certificationsEl.innerHTML = certHTML;
+            }
+
+            // Languages
+            if (languagesEl && Array.isArray(profile.languages)) {
+                const langHTML = '<ul class="disc">' + profile.languages.map(function(l){
+                    const name = l.name || '';
+                    const prof = l.proficiency ? (' — ' + l.proficiency) : '';
+                    return '<li>' + name + prof + '</li>';
+                }).join('') + '</ul>';
+                if (langHTML) languagesEl.innerHTML = langHTML;
+            }
+
+            // Honors & Awards
+            if (honorsEl && Array.isArray(profile.honors)) {
+                const honorsHTML = profile.honors.map(function(h){
+                    const header = (
+                        '<div class="resume-block__header">' +
+                          '<h4 class="h3">' + (h.title || 'Honor/Award') + '</h4>' +
+                          '<p class="resume-block__header-meta">' +
+                            '<span>' + (h.issuer || '') + '</span>' +
+                            '<span class="resume-block__header-date">' + (h.date ? fmtRange(h.date, null) : '') + '</span>' +
+                          '</p>' +
+                        '</div>'
+                    );
+                    const desc = h.description ? '<p>' + h.description + '</p>' : '';
+                    return '<div class="resume-block">' + header + desc + '</div>';
+                }).join('');
+                if (honorsHTML) honorsEl.innerHTML = honorsHTML;
             }
         };
 

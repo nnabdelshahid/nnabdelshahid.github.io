@@ -198,17 +198,7 @@
     ================================================== -->
     <section id="resume" class="s-resume target-section">
 
-        <!-- Resume Import UI (local-only processing) -->
-        <div class="row s-resume__section" id="resume-import-ui">
-            <div class="column large-12 tab-12">
-                <h3 class="section-header-allcaps">Import from LinkedIn (ZIP/CSV/JSON)</h3>
-                <p>Load your LinkedIn Basic Data Export ZIP (recommended), individual CSVs (Positions/Education/Skills), or a site <code>profile.json</code>. All processing happens locally in your browser.</p>
-                <input type="file" id="resume-file-input" accept=".json,.zip,.csv,application/json,application/zip,text/csv">
-                <button class="btn btn--small" id="resume-import-btn">Import</button>
-                <button class="btn btn--small btn--stroke" id="resume-download-btn">Download mapped profile.json</button>
-                <small id="resume-import-status" style="display:block;margin-top:0.8rem" aria-live="polite"></small>
-            </div>
-        </div>
+        
 
         <div class="row s-resume__section">
             <div class="column large-3 tab-12">
@@ -332,6 +322,27 @@
                 </div> <!-- end resume-block -->
 
             </div>
+        </div> <!-- s-resume__section -->
+
+        <div class="row s-resume__section">
+            <div class="column large-3 tab-12">
+                <h3 class="section-header-allcaps">Certifications</h3>
+            </div>
+            <div class="column large-9 tab-12" id="certifications-container"></div>
+        </div> <!-- s-resume__section -->
+
+        <div class="row s-resume__section">
+            <div class="column large-3 tab-12">
+                <h3 class="section-header-allcaps">Languages</h3>
+            </div>
+            <div class="column large-9 tab-12" id="languages-container"></div>
+        </div> <!-- s-resume__section -->
+
+        <div class="row s-resume__section">
+            <div class="column large-3 tab-12">
+                <h3 class="section-header-allcaps">Honors & Awards</h3>
+            </div>
+            <div class="column large-9 tab-12" id="honors-container"></div>
         </div> <!-- s-resume__section -->
 
     </section> <!-- end s-resume -->
@@ -612,13 +623,10 @@
   </footer>
 
 
-        <!-- Java Script
-    ================================================== -->
-        <!-- CSV/ZIP parsing libs for LinkedIn import -->
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-        <script defer src="js/plugins.js"></script>
-        <script defer src="js/main.js"></script>
+            <!-- Java Script
+        ================================================== -->
+            <script defer src="js/plugins.js"></script>
+            <script defer src="js/main.js"></script>
 
 </body>
 
