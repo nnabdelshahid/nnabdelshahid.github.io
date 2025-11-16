@@ -296,6 +296,277 @@
     }; // end ssBackToTop
 
 
+   /* Theme Toggle (dark/light)
+    * ------------------------------------------------------ */
+    const ssThemeToggle = function() {
+        const btn = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+        if (!btn) return;
+
+        const getPreferred = function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light' || saved === 'dark') return saved;
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        };
+
+        const applyTheme = function(mode) {
+            htmlEl.setAttribute('data-theme', mode === 'light' ? 'light' : 'dark');
+            const isDark = mode !== 'light';
+            btn.setAttribute('aria-pressed', String(isDark));
+            const icon = btn.querySelector('.theme-toggle__icon');
+            if (icon) icon.textContent = isDark ? '🌙' : '☀️';
+        };
+
+        let current = getPreferred();
+        applyTheme(current);
+
+        btn.addEventListener('click', function(){
+            current = (current === 'light') ? 'dark' : 'light';
+            localStorage.setItem('theme', current);
+            applyTheme(current);
+        });
+    }; // end ssThemeToggle
+
+
+       /* Resume Import & Upload helpers
+        * ------------------------------------------------------ */
+        const getResumeContainers = function() {
+            return {
+                careerEl: document.getElementById('career-container'),
+                educationEl: document.getElementById('education-container'),
+                skillsListEl: document.getElementById('skills-list')
+            };
+        };
+
+        const fmtRange = function(start, end) {
+            const fmt = function(s){
+                if(!s) return null;
+                // Expecting YYYY or YYYY-MM
+                const p = String(s).split('-');
+                const months = ['', 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                const yy = p[0];
+                const mm = p[1] ? months[parseInt(p[1],10)] : '';
+                return yy + (mm ? ' ' + mm : '');
+            };
+            const a = fmt(start);
+            const b = fmt(end) || 'Present';
+            return (a ? a : '') + ((a || b) ? ' - ' : '') + (b ? b : '');
+        };
+
+        const renderProfile = function(profile) {
+            const { careerEl, educationEl, skillsListEl } = getResumeContainers();
+            if (!(careerEl && educationEl && skillsListEl)) return;
+
+            // Experience
+        // Case Studies
+        const csContainer = document.getElementById('case-studies-container');
+        if (csContainer && Array.isArray(profile.caseStudies)) {
+            const csHTML = profile.caseStudies.map(function(cs){
+                const header = (
+                    '<div class="resume-block__header">' +
+                        '<h4 class="h3">' + (cs.title || 'Case Study') + '</h4>' +
+                        '<p class="resume-block__header-meta">' +
+                            '<span>' + [cs.company, cs.role].filter(Boolean).join(' — ') + '</span>' +
+                            '<span class="resume-block__header-date">' + fmtRange(cs.startDate, cs.endDate) + '</span>' +
+                        '</p>' +
+                    '</div>'
+                );
+                const list = (
+                    '<ul class="disc">' +
+                        (cs.problem ? '<li><strong>Problem:</strong> ' + cs.problem + '</li>' : '') +
+                        (cs.approach ? '<li><strong>Approach:</strong> ' + cs.approach + '</li>' : '') +
+                        (cs.impact ? '<li><strong>Impact:</strong> ' + cs.impact + '</li>' : '') +
+                    '</ul>'
+                );
+                const link = cs.link ? '<p><a class="modal-popup__details" href="' + cs.link + '" target="_blank" rel="noopener">Read more</a></p>' : '';
+                return '<div class="resume-block">' + header + list + link + '</div>';
+            }).join('');
+            if (csHTML) csContainer.innerHTML = csHTML;
+        }
+
+            if (Array.isArray(profile.experience)) {
+                const expHTML = profile.experience.map(function(item){
+                    return (
+                        '<div class="resume-block">' +
+                          '<div class="resume-block__header">' +
+                            '<h4 class="h3">' + (item.company || '') + '</h4>' +
+                            '<p class="resume-block__header-meta">' +
+                              '<span>' + (item.title || '') + '</span>' +
+                              '<span class="resume-block__header-date">' + fmtRange(item.startDate, item.endDate) + '</span>' +
+                            '</p>' +
+                          '</div>' +
+                          (item.description ? '<p>' + item.description + '</p>' : '') +
+                        '</div>'
+                    );
+                }).join('');
+                careerEl.innerHTML = expHTML;
+            }
+
+            // Education
+            if (Array.isArray(profile.education)) {
+                const eduHTML = profile.education.map(function(item){
+                    return (
+                        '<div class="resume-block">' +
+                          '<div class="resume-block__header">' +
+                            '<h4 class="h3">' + (item.school || '') + '</h4>' +
+                            '<p class="resume-block__header-meta">' +
+                              '<span>' + (item.degree || '') + '</span>' +
+                              '<span class="resume-block__header-date">' + fmtRange(item.startDate, item.endDate) + '</span>' +
+                            '</p>' +
+                          '</div>' +
+                        '</div>'
+                    );
+                }).join('');
+                educationEl.innerHTML = eduHTML;
+            }
+
+            // Skills
+            if (skillsListEl) {
+                const skills = Array.isArray(profile.skills) ? profile.skills : [];
+                const items = skills.map(function(s){
+                    const lvl = Math.max(5, Math.min(100, (typeof s.level === 'number' ? s.level : 75)));
+                    const rounded = Math.round(lvl / 5) * 5; // match available CSS classes
+                    const cls = 'percent' + rounded;
+                    return (
+                        '<li>' +
+                          '<div class="progress ' + cls + '"></div>' +
+                          '<strong>' + (s.name || '') + '</strong>' +
+                        '</li>'
+                    );
+                }).join('');
+                if (items) skillsListEl.innerHTML = items;
+            }
+        };
+
+       /* Resume Import (from data/profile.json)
+        * ------------------------------------------------------ */
+        const ssResumeImport = function() {
+            const containers = getResumeContainers();
+            if (!(containers.careerEl && containers.educationEl && containers.skillsListEl)) return;
+
+            fetch('data/profile.json', { cache: 'no-store' })
+                .then(function(res) { if (!res.ok) throw new Error('No profile.json'); return res.json(); })
+                .then(function(profile) { renderProfile(profile); })
+                .catch(function(){ /* profile.json optional; ignore if missing */ });
+
+        }; // end ssResumeImport
+
+       /* Resume Upload UI (LinkedIn export or site profile.json)
+        * ------------------------------------------------------ */
+        const ssResumeUpload = function() {
+            const fileInput = document.getElementById('resume-file-input');
+            const importBtn = document.getElementById('resume-import-btn');
+            const downloadBtn = document.getElementById('resume-download-btn');
+            const statusEl = document.getElementById('resume-import-status');
+            if (!(fileInput && importBtn && downloadBtn && statusEl)) return;
+
+            let mappedProfileCache = null;
+
+            const setStatus = function(msg) {
+                statusEl.textContent = msg || '';
+            };
+
+            const pad2 = function(n){ return (n < 10 ? '0' : '') + n; };
+            const toYYYYMM = function(obj){
+                if (!obj || !obj.year) return null;
+                const y = String(obj.year);
+                const m = obj.month ? pad2(parseInt(obj.month,10)) : null;
+                return m ? (y + '-' + m) : y;
+            };
+
+            const findArrayByKey = function(obj, keys) {
+                const stack = [obj];
+                const keyset = keys.map(function(k){return k.toLowerCase();});
+                while (stack.length) {
+                    const cur = stack.pop();
+                    if (cur && typeof cur === 'object') {
+                        for (var k in cur) {
+                            if (!Object.prototype.hasOwnProperty.call(cur, k)) continue;
+                            const v = cur[k];
+                            if (Array.isArray(v) && keyset.indexOf(k.toLowerCase()) !== -1) return v;
+                            if (v && typeof v === 'object') stack.push(v);
+                        }
+                    }
+                }
+                return null;
+            };
+
+            const mapLinkedInToProfile = function(data) {
+                // Try to locate arrays within arbitrary LinkedIn JSON
+                const positions = findArrayByKey(data, ['positions', 'experience', 'positionsV2']) || [];
+                const educations = findArrayByKey(data, ['educations', 'education']) || [];
+                const skillsArr = findArrayByKey(data, ['skills', 'skillsV2']) || [];
+
+                const experience = positions.map(function(p){
+                    var company = p.companyName || (p.company && (p.company.name || p.company.localizedName)) || '';
+                    var title = p.title || p.designation || '';
+                    var tp = p.timePeriod || p.date || {};
+                    var start = toYYYYMM(tp.startDate || tp.start || {});
+                    var end = toYYYYMM(tp.endDate || tp.end || {}) || null;
+                    var location = p.locationName || (p.location && (p.location.name || p.location.geoLocationName)) || '';
+                    var description = p.description || p.summary || '';
+                    return { company: company, title: title, startDate: start, endDate: end, location: location, description: description };
+                });
+
+                const education = educations.map(function(e){
+                    var school = e.schoolName || (e.school && (e.school.name || e.school.localizedName)) || '';
+                    var degree = e.degreeName || e.degree || '';
+                    var tp = e.timePeriod || e.date || {};
+                    var start = toYYYYMM(tp.startDate || tp.start || {});
+                    var end = toYYYYMM(tp.endDate || tp.end || {});
+                    return { school: school, degree: degree, startDate: start, endDate: end };
+                });
+
+                const skills = skillsArr.map(function(s){
+                    if (typeof s === 'string') return { name: s, level: 75 };
+                    var name = s.name || s.localizedName || s.skill || '';
+                    return { name: name, level: 75 };
+                });
+
+                return { experience: experience, education: education, skills: skills };
+            };
+
+            importBtn.addEventListener('click', function(){
+                setStatus('');
+                const file = fileInput.files && fileInput.files[0];
+                if (!file) { setStatus('Please choose a JSON file first.'); return; }
+                const reader = new FileReader();
+                reader.onerror = function(){ setStatus('Could not read the file.'); };
+                reader.onload = function(evt){
+                    try {
+                        const json = JSON.parse(String(evt.target.result));
+                        // Detect profile format
+                        let profile;
+                        if (json && (Array.isArray(json.experience) || Array.isArray(json.education) || Array.isArray(json.skills))) {
+                            profile = json; // already in site format
+                        } else {
+                            profile = mapLinkedInToProfile(json);
+                        }
+                        mappedProfileCache = profile;
+                        renderProfile(profile);
+                        setStatus('Imported successfully. You can now download mapped profile.json.');
+                    } catch (e) {
+                        setStatus('Invalid JSON file.');
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            downloadBtn.addEventListener('click', function(){
+                if (!mappedProfileCache) { setStatus('Nothing to download. Import a JSON first.'); return; }
+                const blob = new Blob([JSON.stringify(mappedProfileCache, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'profile.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                setStatus('Downloaded profile.json.');
+            });
+        }; // end ssResumeUpload
+
 
    /* initialize
     * ------------------------------------------------------ */
@@ -311,6 +582,9 @@
         ssAlertBoxes();
         ssSmoothScroll();
         ssBackToTop();
+        ssResumeImport();
+        ssResumeUpload();
+        ssThemeToggle();
 
     })();
 

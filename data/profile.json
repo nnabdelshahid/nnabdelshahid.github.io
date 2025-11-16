@@ -1,0 +1,64 @@
+{
+  "summary": "Software Engineer specializing in React, Ruby on Rails, and modern JavaScript. I build fast, accessible web apps that solve real business problems.",
+  "contact": {
+    "email": "NNAbdelshahid@gmail.com",
+    "phone": "+1 (619) 953-7021",
+    "location": "San Diego, CA, USA"
+  },
+  "experience": [
+    {
+      "company": "DateSpot",
+      "title": "Software Development Consultant",
+      "startDate": "2020-07",
+      "endDate": "2020-09",
+      "location": "Remote",
+      "description": "Consulted on feature delivery and performance tuning for consumer web app."
+    },
+    {
+      "company": "Victorise",
+      "title": "Software Engineer Intern",
+      "startDate": "2020-05",
+      "endDate": "2020-07",
+      "location": "San Diego, CA",
+      "description": "Built UI components and API integrations; improved reliability and UX."
+    },
+    {
+      "company": "Notch8",
+      "title": "Software Engineer Intern",
+      "startDate": "2020-02",
+      "endDate": "2020-03",
+      "location": "San Diego, CA",
+      "description": "Contributed to Rails app features and testing."
+    }
+  ],
+  "education": [
+    {
+      "school": "LEARN Academy",
+      "degree": "Full Stack Web Development Certificate",
+      "startDate": "2019-11",
+      "endDate": "2020-03",
+      "location": "San Diego, CA"
+    }
+  ],
+  "skills": [
+    { "name": "HTML", "level": 95 },
+    { "name": "CSS", "level": 90 },
+    { "name": "JavaScript", "level": 75 },
+    { "name": "React", "level": 80 },
+    { "name": "Ruby on Rails", "level": 60 },
+    { "name": "jQuery", "level": 65 }
+  ],
+  "caseStudies": [
+    {
+      "title": "Improved web app loading and responsiveness",
+      "company": "DateSpot",
+      "role": "Software Development Consultant",
+      "startDate": "2020-07",
+      "endDate": "2020-09",
+      "problem": "Initial load and navigation felt slow on 3G connections and mid-tier devices.",
+      "approach": "Audited bundle, reduced unused JS/CSS, added image optimization/lazy loading, deferred non-critical scripts, and tuned caching.",
+      "impact": "Perceived performance improved with faster first paint and smoother interactions. Replace with your exact metrics.",
+      "link": ""
+    }
+  ]
+}

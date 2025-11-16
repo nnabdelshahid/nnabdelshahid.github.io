@@ -5,9 +5,23 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Nader Abdelshahid</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>Nader Abdelshahid — Software Engineer</title>
+    <meta name="description" content="Software Engineer in San Diego building performant, accessible web apps with React, Ruby on Rails, and modern JavaScript. Portfolio, projects, and contact information.">
+    <meta name="author" content="Nader Abdelshahid">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="canonical" href="https://nnabdelshahid.github.io/">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Nader Abdelshahid">
+    <meta property="og:title" content="Nader Abdelshahid — Software Engineer">
+    <meta property="og:description" content="Software Engineer building performant, accessible web apps. View projects and get in touch.">
+    <meta property="og:url" content="https://nnabdelshahid.github.io/">
+    <meta property="og:image" content="https://nnabdelshahid.github.io/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nader Abdelshahid — Software Engineer">
+    <meta name="twitter:description" content="Software Engineer building performant, accessible web apps. View projects and get in touch.">
+    <meta name="twitter:image" content="https://nnabdelshahid.github.io/android-chrome-512x512.png">
 
     <!-- mobile specific metas
     ================================================== -->
@@ -17,6 +31,8 @@
     ================================================== -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/vendor.css">
+    <!-- Preload hero image for faster Largest Contentful Paint -->
+    <link rel="preload" as="image" href="images/header-bg-3000.jpg">
 
     <!-- script
     ================================================== -->
@@ -24,14 +40,38 @@
 
     <!-- favicons
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
+
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Nader Abdelshahid",
+            "jobTitle": "Software Engineer",
+            "image": "https://nnabdelshahid.github.io/images/avatars/NaderAbdelshahid.jpg",
+            "url": "https://nnabdelshahid.github.io/",
+            "sameAs": [
+                "https://www.linkedin.com/in/NNAbdelshahid/",
+                "https://github.com/NNAbdelshahid"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "San Diego",
+                "addressRegion": "CA",
+                "addressCountry": "US"
+            }
+        }
+        </script>
 
 </head>
 
 <body id="top" class="ss-preload">
+
+    <a class="skip-link" href="#content">Skip to content</a>
 
 
     <!-- preloader
@@ -50,12 +90,17 @@
                     <li class="current"><a class="smoothscroll" href="#hero">Home</a></li>
                     <li><a class="smoothscroll" href="#about">About</a></li>
                     <li><a class="smoothscroll" href="#resume">Resume</a></li>
+                    <li><a class="smoothscroll" href="#case-studies">Case Studies</a></li>
                     <li><a class="smoothscroll" href="#portfolio">Projects</a></li>
                     <li><a class="smoothscroll" href="#testimonials">Testimonials</a></li>
                     <li><a class="smoothscroll" href="#contact">Say Hello</a></li>
                 </ul>
             </nav>
         </div> <!-- end row -->
+
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle dark mode">
+            <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+        </button>
 
         <a class="s-header__menu-toggle" href="#0" title="Menu">
             <span class="s-header__menu-icon"></span>
@@ -65,6 +110,7 @@
 
     <!-- hero
     ================================================== -->
+    <main id="content" role="main">
     <section id="hero" class="s-hero target-section">
 
         <div class="s-hero__bg rellax" data-rellax-speed="-7"></div>
@@ -77,14 +123,18 @@
                     <h1>I'm Nader Abdelshahid.</h1>
 
                     <h3>
-                    I’m an Innovative, <span>Software Engineer</span> based in San Diego. Let's <a class="smoothscroll" href="#about">start scrolling</a>
-                    and learn more <a class="smoothscroll" href="#about">about me</a>.
+                    Software Engineer specializing in <span>React</span>, <span>Ruby on Rails</span>, and modern <span>JavaScript</span>. I build fast, accessible web apps that solve real business problems. <a class="smoothscroll" href="#portfolio">See projects</a> or <a class="smoothscroll" href="#contact">get in touch</a>.
                     </h3>
 
-                    <div class="s-hero__content-social">
-                        <a href="https://www.linkedin.com/in/NNAbdelshahid/"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                        <a href="https://www.github.com/NNAbdelshahid/"><i class="fab fa-github" aria-hidden="true"></i></a>
-                        <a href="https://join.skype.com/invite/rXfqW4M1vp01"><i class="fab fa-skype" aria-hidden="true"></i></a>
+                    <p>
+                        <a href="mailto:NNAbdelshahid@gmail.com" class="btn btn--primary btn--pill">Hire Me</a>
+                        <a href="https://docs.google.com/document/d/1TjhivpsM1axikA3fclZ8aui4hY3hQ5t_VD6eXMiRqFo/export?format=pdf" target="_blank" rel="noopener" class="btn btn--stroke btn--pill">View Resume</a>
+                    </p>
+
+                    <div class="s-hero__content-social" aria-label="Social links">
+                        <a aria-label="LinkedIn" href="https://www.linkedin.com/in/NNAbdelshahid/"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                        <a aria-label="GitHub" href="https://www.github.com/NNAbdelshahid/"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a aria-label="Skype" href="https://join.skype.com/invite/rXfqW4M1vp01"><i class="fab fa-skype" aria-hidden="true"></i></a>
                     </div>
 
                 </div> <!-- end s-hero__content-about -->
@@ -95,7 +145,7 @@
         <div class="s-hero__scroll">
             <a href="#about" class="s-hero__scroll-link smoothscroll">
                 <span class="scroll-arrow">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M18.707 12.707L17.293 11.293 13 15.586 13 6 11 6 11 15.586 6.707 11.293 5.293 12.707 12 19.414z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(255, 255, 255, 1)"><path d="M18.707 12.707L17.293 11.293 13 15.586 13 6 11 6 11 15.586 6.707 11.293 5.293 12.707 12 19.414z"></path></svg>
                 </span>
                 <span class="scroll-text">Scroll Down</span>
             </a>
@@ -110,7 +160,7 @@
 
         <div class="row">
             <div class="column large-3 tab-12">
-                <img class="s-about__pic" src="images/avatars/NaderAbdelshahid.jpg" alt="">
+                <img class="s-about__pic" src="images/avatars/NaderAbdelshahid.jpg" alt="Portrait of Nader Abdelshahid" loading="lazy">
             </div>
             <div class="column large-9 tab-12 s-about__content">
                 <h3>About Me</h3>
@@ -127,13 +177,13 @@
                         <p>
                         Nader Abdelshahid <br>
                         <a href="tel:+16199537021">+1 (619) 953-7021</a> <br>
-                        <a href="mailto:#0">NNAbdelshahid@gmail.com</a>
+                        <a href="mailto:NNAbdelshahid@gmail.com">NNAbdelshahid@gmail.com</a>
                         </p>
 
                     </div>
                     <div class="column w-1000-stack">
                         <a href="https://docs.google.com/document/d/1TjhivpsM1axikA3fclZ8aui4hY3hQ5t_VD6eXMiRqFo/export?format=pdf" target="_blank" class="btn btn--download">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M12 16L16 11 13 11 13 4 11 4 11 11 8 11z"></path><path d="M20,18H4v-7H2v7c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2v-7h-2V18z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1)"><path d="M12 16L16 11 13 11 13 4 11 4 11 11 8 11z"></path><path d="M20,18H4v-7H2v7c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2v-7h-2V18z"></path></svg>
                             Resume
                         </a>
                     </div>
@@ -148,11 +198,23 @@
     ================================================== -->
     <section id="resume" class="s-resume target-section">
 
+        <!-- Resume Import UI (local-only processing) -->
+        <div class="row s-resume__section" id="resume-import-ui">
+            <div class="column large-12 tab-12">
+                <h3 class="section-header-allcaps">Import from JSON</h3>
+                <p>Load your LinkedIn export (Profile JSON) or a site <code>profile.json</code> to populate this page. Processing happens locally in your browser.</p>
+                <input type="file" id="resume-file-input" accept="application/json">
+                <button class="btn btn--small" id="resume-import-btn">Import</button>
+                <button class="btn btn--small btn--stroke" id="resume-download-btn">Download mapped profile.json</button>
+                <small id="resume-import-status" style="display:block;margin-top:0.8rem" aria-live="polite"></small>
+            </div>
+        </div>
+
         <div class="row s-resume__section">
             <div class="column large-3 tab-12">
                 <h3 class="section-header-allcaps">Career</h3>
             </div>
-            <div class="column large-9 tab-12">
+            <div class="column large-9 tab-12" id="career-container">
                 <div class="resume-block">
 
                     <div class="resume-block__header">
@@ -215,7 +277,7 @@
             <div class="column large-3 tab-12">
                 <h3 class="section-header-allcaps">Education</h3>
             </div>
-            <div class="column large-9 tab-12">
+            <div class="column large-9 tab-12" id="education-container">
                 <div class="resume-block">
 
                     <div class="resume-block__header">
@@ -237,10 +299,10 @@
             <div class="column large-3 tab-12">
                 <h3 class="section-header-allcaps">Skills</h3>
             </div>
-            <div class="column large-9 tab-12">
+            <div class="column large-9 tab-12" id="skills-container">
                 <div class="resume-block">
 
-                    <ul class="skill-bars-fat">
+                    <ul class="skill-bars-fat" id="skills-list">
                         <li>
                         <div class="progress percent95"></div>
                         <strong>HTML</strong>
@@ -275,6 +337,32 @@
     </section> <!-- end s-resume -->
 
 
+    <!-- case studies
+    ================================================== -->
+    <section id="case-studies" class="s-resume target-section" aria-label="Case studies">
+        <div class="row s-resume__section">
+            <div class="column large-3 tab-12">
+                <h3 class="section-header-allcaps">Case Studies</h3>
+            </div>
+            <div class="column large-9 tab-12" id="case-studies-container">
+                <div class="resume-block">
+                    <div class="resume-block__header">
+                        <h4 class="h3">Sample: Improving App Performance</h4>
+                        <p class="resume-block__header-meta">
+                            <span>DateSpot — Software Development Consultant</span>
+                            <span class="resume-block__header-date">2020</span>
+                        </p>
+                    </div>
+                    <ul class="disc">
+                        <li><strong>Problem:</strong> App felt sluggish under load and on mobile networks.</li>
+                        <li><strong>Approach:</strong> Audited bundle, deferred non-critical JS, image optimization, and caching strategy.</li>
+                        <li><strong>Impact:</strong> Faster initial load and more responsive interactions (replace with your metrics).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section> <!-- end case studies -->
+
     <!-- portfolio
     ================================================== -->
     <section id="portfolio" class="s-portfolio target-section">
@@ -290,45 +378,45 @@
             <div class="column folio-item">
               <h5> Tic Tac Toe </h5>
                 <a href="#modal-01" class="folio-item__thumb">
-                    <img src="images/portfolio/sonic.jpg"
-                         srcset="images/portfolio/sonic.jpg 1x,
-                                 images/portfolio/sonic@2x.jpg 2x" alt="">
+            <img src="images/portfolio/sonic.jpg" loading="lazy"
+             srcset="images/portfolio/sonic.jpg 1x,
+                 images/portfolio/sonic@2x.jpg 2x" alt="Tic Tac Toe game preview">
                 </a>
             </div> <!-- end folio-item -->
 
             <div class="column folio-item">
               <h5> Treasure Hunt </h5>
                 <a href="#modal-02" class="folio-item__thumb">
-                    <img src="images/portfolio/cat.jpg"
-                         srcset="images/portfolio/cat.jpg 1x,
-                                 images/portfolio/cat@2x.jpg 2x" alt="">
+            <img src="images/portfolio/cat.jpg" loading="lazy"
+             srcset="images/portfolio/cat.jpg 1x,
+                 images/portfolio/cat@2x.jpg 2x" alt="Treasure Hunt game preview">
                 </a>
             </div> <!-- end folio-item -->
 
             <div class="column folio-item">
               <h5> Dice Roller </h5>
                 <a href="#modal-03" class="folio-item__thumb">
-                    <img src="images/portfolio/diceroller.jpg"
-                         srcset="images/portfolio/diceroller.jpg 1x,
-                                 images/portfolio/diceroller@2x.jpg 2x" alt="">
+            <img src="images/portfolio/diceroller.jpg" loading="lazy"
+             srcset="images/portfolio/diceroller.jpg 1x,
+                 images/portfolio/diceroller@2x.jpg 2x" alt="Dice Roller app preview">
                 </a>
             </div> <!-- end folio-item -->
 
             <div class="column folio-item">
               <h5> Magic 8 Ball </h5>
                 <a href="#modal-04" class="folio-item__thumb">
-                    <img src="images/portfolio/magicball.jpg"
-                         srcset="images/portfolio/magicball.jpg 1x,
-                                 images/portfolio/magicball@2x.jpg 2x" alt="">
+            <img src="images/portfolio/magicball.jpg" loading="lazy"
+             srcset="images/portfolio/magicball.jpg 1x,
+                 images/portfolio/magicball@2x.jpg 2x" alt="Magic 8 Ball app preview">
                 </a>
             </div> <!-- end folio-item -->
 
             <div class="column folio-item">
               <h5> FlashCards </h5>
                 <a href="#modal-05" class="folio-item__thumb">
-                    <img src="images/portfolio/LEARN.jpg"
-                         srcset="images/portfolio/LEARN.jpg 1x,
-                                 images/portfolio/LEARN@2x.jpg 2x" alt="">
+            <img src="images/portfolio/LEARN.jpg" loading="lazy"
+             srcset="images/portfolio/LEARN.jpg 1x,
+                 images/portfolio/LEARN@2x.jpg 2x" alt="Flashcards study app preview">
                 </a>
             </div> <!-- end folio-item -->
                <p>Click <a id="tribute-link" href="https://github.com/NNAbdelshahid" target="_blank"> here</a> to check out more projects on GitHub!
@@ -340,49 +428,49 @@
         =========================================================== -->
         <div id="modal-01" hidden>
             <div class="modal-popup">
-                <img src="images/portfolio/gallery/g-sonic.jpg" alt=""/>
+                <img src="images/portfolio/gallery/g-sonic.jpg" alt="Tic Tac Toe gameplay screenshot"/>
 
                 <div class="modal-popup__desc">
-                    <ul class="modal-popup__cat">
-                      <a href="https://sonic-tic-tac-toe.netlify.app/" <class="modal-popup__details">Project link</a>
-                  </ul>
+                                        <ul class="modal-popup__cat">
+                                            <li><a href="https://sonic-tic-tac-toe.netlify.app/" class="modal-popup__details" target="_blank" rel="noopener">Project link</a></li>
+                                    </ul>
                 </div>
             </div>
         </div> <!-- end modal -->
 
         <div id="modal-02" hidden>
             <div class="modal-popup">
-                <img src="images/portfolio/gallery/g-cat.jpg" alt="" />
+                <img src="images/portfolio/gallery/g-cat.jpg" alt="Treasure Hunt game screenshot" />
 
                 <div class="modal-popup__desc">
-                    <ul class="modal-popup__cat">
-                      <a href="https://cat-treasure-hunt.netlify.app/" <class="modal-popup__details">Project link</a>
-                    </ul>
+                                        <ul class="modal-popup__cat">
+                                            <li><a href="https://cat-treasure-hunt.netlify.app/" class="modal-popup__details" target="_blank" rel="noopener">Project link</a></li>
+                                        </ul>
                 </div>
             </div>
         </div> <!-- end modal -->
 
         <div id="modal-03" hidden>
             <div class="modal-popup">
-                <img src="images/portfolio/gallery/g-diceroller.jpg" alt="" />
+                <img src="images/portfolio/gallery/g-diceroller.jpg" alt="Dice Roller app screenshot" />
 
                 <div class="modal-popup__desc">
-                    <ul class="modal-popup__cat">
-                      <a href="https://dicerollin.netlify.app/" <class="modal-popup__details">Project link</a>
-                    </ul>
+                                        <ul class="modal-popup__cat">
+                                            <li><a href="https://dicerollin.netlify.app/" class="modal-popup__details" target="_blank" rel="noopener">Project link</a></li>
+                                        </ul>
                 </div>
             </div>
         </div> <!-- end modal -->
 
         <div id="modal-04" hidden>
             <div class="modal-popup">
-                <img src="images/portfolio/gallery/g-magicball.jpg" alt="" />
+                <img src="images/portfolio/gallery/g-magicball.jpg" alt="Magic 8 Ball app screenshot" />
 
                 <div class="modal-popup__desc">
-                    <ul class="modal-popup__cat">
-                      <a href="https://8ballmagic.netlify.app/" <class="modal-popup__details">Project link</a>
+                                        <ul class="modal-popup__cat">
+                                            <li><a href="https://8ballmagic.netlify.app/" class="modal-popup__details" target="_blank" rel="noopener">Project link</a></li>
 
-                    </ul>
+                                        </ul>
                 </div>
             </div>
         </div> <!-- end modal -->
@@ -390,14 +478,14 @@
         <div id="modal-05" hidden>
             <div class="modal-popup">
 
-                <img src="images/portfolio/gallery/g-LEARN.jpg" alt="" />
+                <img src="images/portfolio/gallery/g-LEARN.jpg" alt="Flashcards study app screenshot" />
 
                 <div class="modal-popup__desc">
                   <!-- <h5> Flash Card </h5>
                     <p> Study guide for students at LEARN Academy.</p> -->
-                    <ul class="modal-popup__cat">
-                      <a href="https://obscure-reaches-13754.herokuapp.com/" <class="modal-popup__details">Project link</a>
-                    </ul>
+                                        <ul class="modal-popup__cat">
+                                            <li><a href="https://obscure-reaches-13754.herokuapp.com/" class="modal-popup__details" target="_blank" rel="noopener">Project link</a></li>
+                                        </ul>
                 </div>
             </div>
         </div> <!-- end modal -->
@@ -425,7 +513,7 @@
 
                       <div class="testimonial-slider__slide swiper-slide">
                           <div class="testimonial-slider__author">
-                              <img src="images/avatars/JoseLopez.jpg" alt="Author image" class="testimonial-slider__avatar">
+                              <img src="images/avatars/JoseLopez.jpg" alt="Jose Lopez" class="testimonial-slider__avatar" loading="lazy">
                               <cite class="testimonial-slider__cite">
                                   <strong>Jose Lopez</strong>
                                   <span>Full Stack Web Developer, LEARN Academy</span>
@@ -481,7 +569,7 @@
                               Email
                           </h5>
                           <p class="contact-block__content">
-                              <a class="mailtoui" href="mailto:NNAbdelshahid@gmai.com">NNAbdelshahid@gmail.com</a>
+                              <a class="mailtoui" href="mailto:NNAbdelshahid@gmail.com">NNAbdelshahid@gmail.com</a>
                           </p>
                       </div> <!-- end contact-block -->
                   </div>
@@ -509,7 +597,8 @@
 
   <!-- footer
   ================================================== -->
-  <footer class="s-footer">
+    </main>
+    <footer class="s-footer">
       <div class="row">
           <div class="column large-4 medium-6 w-1000-stack s-footer__social-block">
               <ul class="s-footer__social">
@@ -525,8 +614,8 @@
 
   <!-- Java Script
   ================================================== -->
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+    <script defer src="js/plugins.js"></script>
+    <script defer src="js/main.js"></script>
 
 </body>
 
