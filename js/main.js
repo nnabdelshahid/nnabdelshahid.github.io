@@ -170,6 +170,9 @@
     * ------------------------------------------------------ */ 
     const ssSwiper = function() {
 
+        const slider = document.querySelector('.swiper-container');
+        if (!slider) return;
+
         const mySwiper = new Swiper('.swiper-container', {
 
             slidesPerView: 1,
@@ -831,6 +834,40 @@
         }; // end ssResumeUpload
 
 
+   /* Contact form (GitHub Pages friendly)
+    * ------------------------------------------------------ */
+    const ssContactForm = function() {
+        const form = document.getElementById('contact-form');
+        const statusEl = document.getElementById('contact-form-status');
+        if (!form) return;
+
+        form.addEventListener('submit', async function(event){
+            event.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) submitBtn.disabled = true;
+            if (statusEl) statusEl.textContent = 'Sending message...';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (!response.ok) throw new Error('Unable to send right now. Please try again.');
+
+                if (statusEl) statusEl.textContent = 'Thanks! Your message was sent successfully.';
+                form.reset();
+            } catch (error) {
+                if (statusEl) statusEl.textContent = error.message || 'Message failed to send.';
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
+        });
+    }; // end ssContactForm
+
+
    /* initialize
     * ------------------------------------------------------ */
     (function ssInit() {
@@ -847,7 +884,7 @@
         ssBackToTop();
         ssResumeImport();
         ssResumeUpload();
-        ssThemeToggle();
+        ssContactForm();
 
     })();
 
