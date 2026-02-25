@@ -1,5 +1,5 @@
 {
-  "summary": "Software Engineer specializing in React, Ruby on Rails, and modern JavaScript. I build fast, accessible web apps that solve real business problems.",
+  "summary": "Software Engineer focused on secure, resilient payment systems and scalable web applications. I build reliable products with modern JavaScript, React, and backend engineering best practices.",
   "contact": {
     "email": "nader.abdelshahid@wellsfargo.com",
     "phone": "+1 (619) 953-7021",
@@ -10,11 +10,11 @@
   "experience": [
     {
       "company": "Wells Fargo",
-      "title": "Engineering Associate",
+      "title": "Software Engineer",
       "startDate": "2022-08",
       "endDate": null,
       "location": "Chandler, Arizona, United States",
-      "description": "Assisted in numerous compliance and regulatory initiatives, test script preparation and assistance, and FedNow message spec certification. Development, testing and deployment of TCH RTP v3.0 messages specification changes were additionally phases in the FedNow implementation. Ability to manage the core areas of the applications: compliance, regulatory, risk management, network management, security controls, controlled procedures, seamless audit engagement, change management, resiliency planning and execution, platform engagement, onboarding and ramp up for new and existing applications. Applying application hardening, enhancements, new builds, tech refresh, development, sprint planning, scalability, support, optimization, for the Instant Payment applications as volumes continue to increase."
+      "description": "Build and maintain instant payments services supporting FedNow and RTP message flows, with a focus on reliability, compliance, and performance. Deliver production features through sprint planning, automated testing, and controlled deployments while partnering with cross-functional teams on risk controls, resiliency, and platform modernization."
     },
     {
       "company": "Self-employed",
@@ -54,7 +54,7 @@
       "startDate": "2019-11",
       "endDate": "2020-02",
       "location": "San Diego, California, United States",
-  "description": "Learn Academy an intensive full-time coding boot camp that teaches skills from coding itself, to pair programming. The boot camp solidifies interpersonal communication and working as a pair, a mob, or even alone. •\tCompleted over 480 hours of direct coding in an intensive web development boot camp. •\tGained proficiency in JavaScript, Ruby, and React while creating full-stack programs.  •\tEmployed effective communication and cooperation over pair and mob programming assignments."
+      "description": "Learn Academy an intensive full-time coding boot camp that teaches skills from coding itself, to pair programming. The boot camp solidifies interpersonal communication and working as a pair, a mob, or even alone. \u2022\tCompleted over 480 hours of direct coding in an intensive web development boot camp. \u2022\tGained proficiency in JavaScript, Ruby, and React while creating full-stack programs.  \u2022\tEmployed effective communication and cooperation over pair and mob programming assignments."
     },
     {
       "company": "Jani-King of Cleveland",
@@ -115,171 +115,11 @@
   ],
   "skills": [
     {
-      "name": "Software Implementation",
-      "level": 75
-    },
-    {
-      "name": "Defect Elimination",
-      "level": 75
-    },
-    {
-      "name": "IBM UrbanCode Deploy (uDeploy)",
-      "level": 75
-    },
-    {
-      "name": "Jenkins",
-      "level": 75
-    },
-    {
-      "name": "Software Documentation",
-      "level": 75
-    },
-    {
-      "name": "Scrum",
-      "level": 75
-    },
-    {
-      "name": "RSpec",
-      "level": 75
-    },
-    {
-      "name": "Back-End Web Development",
-      "level": 75
-    },
-    {
-      "name": "Robo3t",
-      "level": 75
-    },
-    {
-      "name": "Sourcetree",
-      "level": 75
-    },
-    {
-      "name": "Trello",
-      "level": 75
-    },
-    {
-      "name": "Ionic Framework",
-      "level": 75
-    },
-    {
-      "name": "Asana",
-      "level": 75
-    },
-    {
-      "name": "DigitalOcean",
-      "level": 75
-    },
-    {
-      "name": "Software Design",
-      "level": 75
-    },
-    {
-      "name": "Atom",
-      "level": 75
-    },
-    {
-      "name": "Bitbucket",
-      "level": 75
-    },
-    {
-      "name": "GitHub",
-      "level": 75
-    },
-    {
-      "name": "JUnit",
-      "level": 75
-    },
-    {
-      "name": "IntelliJ IDEA",
-      "level": 75
-    },
-    {
-      "name": "Jira",
-      "level": 75
-    },
-    {
       "name": "JavaScript",
       "level": 75
     },
     {
-      "name": "Ruby on Rails",
-      "level": 75
-    },
-    {
-      "name": "Ruby",
-      "level": 75
-    },
-    {
-      "name": "Research",
-      "level": 75
-    },
-    {
-      "name": "Data Analysis",
-      "level": 75
-    },
-    {
-      "name": "Statistics",
-      "level": 75
-    },
-    {
-      "name": "Agile Methodologies",
-      "level": 75
-    },
-    {
-      "name": "Machine Learning",
-      "level": 75
-    },
-    {
-      "name": "Web Applications",
-      "level": 75
-    },
-    {
-      "name": "Quality Assurance",
-      "level": 75
-    },
-    {
-      "name": "Data Entry",
-      "level": 75
-    },
-    {
-      "name": "Good Manufacturing Practice (GMP)",
-      "level": 75
-    },
-    {
-      "name": "Data Mining",
-      "level": 75
-    },
-    {
-      "name": "Software Development",
-      "level": 75
-    },
-    {
-      "name": "Cascading Style Sheets (CSS)",
-      "level": 75
-    },
-    {
-      "name": "HTML",
-      "level": 75
-    },
-    {
-      "name": "Microsoft Office",
-      "level": 75
-    },
-    {
-      "name": "Python",
-      "level": 75
-    },
-    {
-      "name": "Microsoft Excel",
-      "level": 75
-    },
-    {
-      "name": "Microsoft Word",
-      "level": 75
-    },
-    {
-      "name": "Microsoft PowerPoint",
+      "name": "TypeScript",
       "level": 75
     },
     {
@@ -287,115 +127,11 @@
       "level": 75
     },
     {
-      "name": "Node.js",
-      "level": 75
-    },
-    {
-      "name": "JSON",
-      "level": 75
-    },
-    {
-      "name": "PostgreSQL",
-      "level": 75
-    },
-    {
-      "name": "Bootstrap",
-      "level": 75
-    },
-    {
-      "name": "Postman API",
-      "level": 75
-    },
-    {
-      "name": "SQL",
-      "level": 75
-    },
-    {
-      "name": "NoSQL",
-      "level": 75
-    },
-    {
-      "name": "jQuery",
-      "level": 75
-    },
-    {
-      "name": "MongoDB",
-      "level": 75
-    },
-    {
-      "name": "MySQL",
-      "level": 75
-    },
-    {
-      "name": "REST APIs",
-      "level": 75
-    },
-    {
-      "name": "Transact-SQL (T-SQL)",
-      "level": 75
-    },
-    {
-      "name": "AngularJS",
-      "level": 75
-    },
-    {
-      "name": "Django",
-      "level": 75
-    },
-    {
-      "name": "Git",
-      "level": 75
-    },
-    {
-      "name": "Representational State Transfer (REST)",
-      "level": 75
-    },
-    {
-      "name": "Cloud9 IDE",
-      "level": 75
-    },
-    {
-      "name": "Adobe Acrobat",
-      "level": 75
-    },
-    {
       "name": "React Native",
       "level": 75
     },
     {
-      "name": "Leadership",
-      "level": 75
-    },
-    {
-      "name": "Teamwork",
-      "level": 75
-    },
-    {
-      "name": "Time Management",
-      "level": 75
-    },
-    {
-      "name": "Critical Thinking",
-      "level": 75
-    },
-    {
-      "name": "Problem Solving",
-      "level": 75
-    },
-    {
-      "name": "Communication",
-      "level": 75
-    },
-    {
-      "name": "Full-Stack Development",
-      "level": 75
-    },
-    {
-      "name": "Data Analytics",
-      "level": 75
-    },
-    {
-      "name": "Front-end Development",
+      "name": "Ruby on Rails",
       "level": 75
     },
     {
@@ -403,27 +139,75 @@
       "level": 75
     },
     {
-      "name": "Network Security",
+      "name": "Spring Boot",
       "level": 75
     },
     {
-      "name": "Network Administration",
+      "name": "HTML",
       "level": 75
     },
     {
-      "name": "System Administration",
+      "name": "CSS",
       "level": 75
     },
     {
-      "name": "Tech Career Skills",
+      "name": "Sass",
       "level": 75
     },
     {
-      "name": "Career Management",
+      "name": "REST APIs",
       "level": 75
     },
     {
-      "name": "Programming",
+      "name": "PostgreSQL",
+      "level": 75
+    },
+    {
+      "name": "MySQL",
+      "level": 75
+    },
+    {
+      "name": "MongoDB",
+      "level": 75
+    },
+    {
+      "name": "Jenkins",
+      "level": 75
+    },
+    {
+      "name": "Docker",
+      "level": 75
+    },
+    {
+      "name": "Git",
+      "level": 75
+    },
+    {
+      "name": "GitHub",
+      "level": 75
+    },
+    {
+      "name": "Bitbucket",
+      "level": 75
+    },
+    {
+      "name": "RSpec",
+      "level": 75
+    },
+    {
+      "name": "Jest",
+      "level": 75
+    },
+    {
+      "name": "Postman",
+      "level": 75
+    },
+    {
+      "name": "Scrum",
+      "level": 75
+    },
+    {
+      "name": "Agile Methodologies",
       "level": 75
     }
   ],
