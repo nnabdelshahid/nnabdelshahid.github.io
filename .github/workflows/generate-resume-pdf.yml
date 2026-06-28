@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'resume/**'
+      - 'resume/index.html'
       - 'css/**'
       - '.github/workflows/generate-resume-pdf.yml'
       - 'scripts/generate_resume_pdf.js'
