@@ -2,8 +2,6 @@ const header = document.querySelector("[data-header]");
 const menu = document.querySelector("[data-menu]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const year = document.querySelector("#year");
-const contactForm = document.querySelector("#contact-form");
-const contactStatus = document.querySelector("#contact-form-status");
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -32,26 +30,20 @@ if (header) {
   window.addEventListener("scroll", updateHeader, { passive: true });
 }
 
-if (contactForm && contactStatus) {
-  contactForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    contactStatus.textContent = "Sending...";
+const projectStack = document.querySelector(".project-stack");
+const hasAslProject = projectStack && projectStack.querySelector("[data-project='asl-communication-aid']");
 
-    try {
-      const response = await fetch(contactForm.action, {
-        method: "POST",
-        body: new FormData(contactForm),
-        headers: { Accept: "application/json" }
-      });
-
-      if (!response.ok) {
-        throw new Error("Message failed");
-      }
-
-      contactForm.reset();
-      contactStatus.textContent = "Thanks. Your message was sent.";
-    } catch (error) {
-      contactStatus.textContent = "The form could not send right now. Please email NNAbdelshahid@gmail.com directly.";
-    }
-  });
+if (projectStack && !hasAslProject) {
+  const aslProject = document.createElement("article");
+  aslProject.className = "project-card";
+  aslProject.dataset.project = "asl-communication-aid";
+  aslProject.innerHTML = `
+    <img src="images/portfolio/gallery/g-LEARN.jpg" alt="ASL Communication Aid project preview" loading="lazy">
+    <div>
+      <h3>ASL Communication Aid</h3>
+      <p>Accessible communication demo for ASL practice, camera recognition, and speech-ready text.</p>
+      <a href="https://nnabdelshahid.github.io/asl-communication-aid/" target="_blank" rel="noopener">Live demo</a>
+    </div>
+  `;
+  projectStack.appendChild(aslProject);
 }
