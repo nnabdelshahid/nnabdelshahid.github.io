@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
     <title>AMP WorkBench</title>
     <style>
       :root {
@@ -15,6 +16,7 @@
         --accent: #0f766e;
         --accent-strong: #0b5f59;
         --warning: #a45314;
+        --danger: #b42318;
       }
 
       * {
@@ -29,8 +31,82 @@
         line-height: 1.55;
       }
 
+      body.locked {
+        overflow: hidden;
+      }
+
       a {
         color: var(--accent-strong);
+      }
+
+      .gate[hidden] {
+        display: none;
+      }
+
+      .gate {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: var(--wash);
+      }
+
+      .gate-card {
+        width: min(440px, 100%);
+        border: 1px solid var(--line);
+        background: #ffffff;
+        padding: 28px;
+      }
+
+      .gate-mark {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 18px;
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      .gate-card h1 {
+        margin: 0 0 10px;
+        font-size: 30px;
+        line-height: 1.08;
+      }
+
+      .gate-card p {
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+
+      .password-row {
+        display: flex;
+        gap: 10px;
+      }
+
+      .password-row input {
+        min-width: 0;
+        flex: 1;
+        min-height: 44px;
+        border: 1px solid var(--line);
+        padding: 0 12px;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .gate-error {
+        min-height: 22px;
+        margin-top: 12px;
+        color: var(--danger);
+        font-size: 14px;
+      }
+
+      body.locked .shell {
+        display: none;
       }
 
       .shell {
@@ -129,6 +205,12 @@
         color: var(--accent-strong);
       }
 
+      .button.compact {
+        min-height: 38px;
+        padding: 0 14px;
+        font-size: 14px;
+      }
+
       .panel {
         border: 1px solid var(--line);
         background: var(--panel);
@@ -186,6 +268,106 @@
         padding: 20px;
       }
 
+      .dropbox {
+        margin-top: 22px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        padding: 24px;
+      }
+
+      .dropbox-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .dropbox h2 {
+        margin: 0 0 6px;
+        font-size: 24px;
+      }
+
+      .dropbox p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .drop-target {
+        min-height: 160px;
+        display: grid;
+        place-items: center;
+        border: 2px dashed #95a3b3;
+        background: #f9fbfc;
+        text-align: center;
+        transition: border-color 0.16s ease, background 0.16s ease;
+      }
+
+      .drop-target.active {
+        border-color: var(--accent);
+        background: #eef9f7;
+      }
+
+      .drop-target strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 20px;
+      }
+
+      .drop-target span {
+        color: var(--muted);
+      }
+
+      .upload-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .upload-input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+      }
+
+      .upload-status {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .file-list {
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid var(--line);
+      }
+
+      .file-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 14px;
+      }
+
+      .file-list span:first-child {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .file-list span:last-child {
+        flex: 0 0 auto;
+        color: var(--muted);
+      }
+
       .note {
         margin-top: 22px;
         color: var(--warning);
@@ -224,7 +406,20 @@
       }
     </style>
   </head>
-  <body>
+  <body class="locked">
+    <section class="gate" id="passwordGate" aria-label="Password required">
+      <form class="gate-card" id="passwordForm">
+        <div class="gate-mark">AMP</div>
+        <h1>Enter Password</h1>
+        <p>This project page is locked.</p>
+        <div class="password-row">
+          <input id="passwordInput" type="password" inputmode="numeric" autocomplete="current-password" aria-label="Password" />
+          <button class="button" type="submit">Enter</button>
+        </div>
+        <div class="gate-error" id="passwordError" role="alert" aria-live="polite"></div>
+      </form>
+    </section>
+
     <div class="shell">
       <header>
         <div class="bar">
@@ -299,9 +494,37 @@
           </div>
         </section>
 
+        <section class="dropbox" aria-labelledby="dropbox-title">
+          <div class="dropbox-head">
+            <div>
+              <h2 id="dropbox-title">Project Drop Box</h2>
+              <p id="dropbox-copy">Stage a project zip or folder from this browser.</p>
+            </div>
+          </div>
+
+          <div class="drop-target" id="projectDropzone" tabindex="0" role="button" aria-describedby="dropbox-copy">
+            <div>
+              <strong>Drop Project Here</strong>
+              <span>ZIP, archive, or folder selection</span>
+            </div>
+          </div>
+
+          <div class="upload-tools">
+            <input class="upload-input" id="projectZipInput" type="file" multiple accept=".zip,.7z,.tar,.gz,.tgz,.rar" />
+            <input class="upload-input" id="projectFolderInput" type="file" multiple webkitdirectory directory />
+            <button class="button compact secondary" type="button" id="chooseProjectZip">Choose ZIP</button>
+            <button class="button compact secondary" type="button" id="chooseProjectFolder">Choose Folder</button>
+            <button class="button compact secondary" type="button" id="clearProjectUpload" disabled>Clear</button>
+          </div>
+
+          <div class="upload-status" id="projectUploadStatus">No project selected.</div>
+          <ul class="file-list" id="projectFileList" aria-live="polite"></ul>
+        </section>
+
         <p class="note">
           The full WorkBench application depends on local runtime services and is not
-          hosted from this static GitHub Pages site.
+          hosted from this static GitHub Pages site. Selected drop box files stay in
+          the browser until a storage backend is connected.
         </p>
       </main>
 
@@ -309,5 +532,139 @@
         <div class="foot">AMP WorkBench project landing page.</div>
       </footer>
     </div>
+    <script>
+      const PASSWORD_HASH = "d91687eca83638ff226f806a03ee8d547f8ecf84ed5b99fb6ed48fcfa48b8e7c";
+      const UNLOCK_KEY = "amp-workbench-page-unlocked";
+      const gate = document.getElementById("passwordGate");
+      const passwordForm = document.getElementById("passwordForm");
+      const passwordInput = document.getElementById("passwordInput");
+      const passwordError = document.getElementById("passwordError");
+
+      function toHex(buffer) {
+        return Array.from(new Uint8Array(buffer))
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join("");
+      }
+
+      async function hashText(value) {
+        const data = new TextEncoder().encode(value);
+        const digest = await crypto.subtle.digest("SHA-256", data);
+        return toHex(digest);
+      }
+
+      function unlockPage() {
+        sessionStorage.setItem(UNLOCK_KEY, "true");
+        document.body.classList.remove("locked");
+        gate.hidden = true;
+      }
+
+      if (sessionStorage.getItem(UNLOCK_KEY) === "true") {
+        unlockPage();
+      } else {
+        passwordInput.focus();
+      }
+
+      passwordForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        passwordError.textContent = "";
+        const enteredHash = await hashText(passwordInput.value.trim());
+        if (enteredHash === PASSWORD_HASH) {
+          unlockPage();
+          return;
+        }
+        passwordInput.value = "";
+        passwordInput.focus();
+        passwordError.textContent = "Incorrect password.";
+      });
+
+      const dropzone = document.getElementById("projectDropzone");
+      const zipInput = document.getElementById("projectZipInput");
+      const folderInput = document.getElementById("projectFolderInput");
+      const chooseZip = document.getElementById("chooseProjectZip");
+      const chooseFolder = document.getElementById("chooseProjectFolder");
+      const clearUpload = document.getElementById("clearProjectUpload");
+      const uploadStatus = document.getElementById("projectUploadStatus");
+      const fileList = document.getElementById("projectFileList");
+
+      function formatBytes(value) {
+        if (value < 1024) return `${value} B`;
+        if (value < 1024 * 1024) return `${(value / 1024).toFixed(1)} KB`;
+        if (value < 1024 * 1024 * 1024) return `${(value / 1024 / 1024).toFixed(1)} MB`;
+        return `${(value / 1024 / 1024 / 1024).toFixed(2)} GB`;
+      }
+
+      function renderFiles(fileSource) {
+        const files = Array.from(fileSource || []);
+        fileList.replaceChildren();
+        clearUpload.disabled = files.length === 0;
+
+        if (!files.length) {
+          uploadStatus.textContent = "No project selected.";
+          return;
+        }
+
+        const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
+        uploadStatus.textContent = `${files.length} file${files.length === 1 ? "" : "s"} staged in browser, ${formatBytes(totalBytes)} total.`;
+
+        files
+          .slice()
+          .sort((a, b) => (a.webkitRelativePath || a.name).localeCompare(b.webkitRelativePath || b.name))
+          .slice(0, 12)
+          .forEach((file) => {
+            const item = document.createElement("li");
+            const name = document.createElement("span");
+            const size = document.createElement("span");
+            name.textContent = file.webkitRelativePath || file.name;
+            size.textContent = formatBytes(file.size);
+            item.append(name, size);
+            fileList.append(item);
+          });
+
+        if (files.length > 12) {
+          const item = document.createElement("li");
+          const more = document.createElement("span");
+          const blank = document.createElement("span");
+          more.textContent = `${files.length - 12} more file${files.length - 12 === 1 ? "" : "s"}`;
+          blank.textContent = "";
+          item.append(more, blank);
+          fileList.append(item);
+        }
+      }
+
+      chooseZip.addEventListener("click", () => zipInput.click());
+      chooseFolder.addEventListener("click", () => folderInput.click());
+      zipInput.addEventListener("change", () => renderFiles(zipInput.files));
+      folderInput.addEventListener("change", () => renderFiles(folderInput.files));
+      clearUpload.addEventListener("click", () => {
+        zipInput.value = "";
+        folderInput.value = "";
+        renderFiles([]);
+      });
+
+      ["dragenter", "dragover"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, (event) => {
+          event.preventDefault();
+          dropzone.classList.add("active");
+        });
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, (event) => {
+          event.preventDefault();
+          dropzone.classList.remove("active");
+        });
+      });
+
+      dropzone.addEventListener("drop", (event) => {
+        renderFiles(event.dataTransfer.files);
+      });
+
+      dropzone.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          zipInput.click();
+        }
+      });
+    </script>
   </body>
 </html>
