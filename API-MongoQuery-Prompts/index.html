@@ -498,7 +498,7 @@
           <div class="dropbox-head">
             <div>
               <h2 id="dropbox-title">Project Drop Box</h2>
-              <p id="dropbox-copy">Stage a project zip or folder from this browser.</p>
+              <p id="dropbox-copy">Save a project zip or folder in this browser.</p>
             </div>
           </div>
 
@@ -517,14 +517,14 @@
             <button class="button compact secondary" type="button" id="clearProjectUpload" disabled>Clear</button>
           </div>
 
-          <div class="upload-status" id="projectUploadStatus">No project selected.</div>
+          <div class="upload-status" id="projectUploadStatus">No project saved in this browser.</div>
           <ul class="file-list" id="projectFileList" aria-live="polite"></ul>
         </section>
 
         <p class="note">
           The full WorkBench application depends on local runtime services and is not
-          hosted from this static GitHub Pages site. Selected drop box files stay in
-          the browser until a storage backend is connected.
+          hosted from this static GitHub Pages site. Drop box files are saved in
+          this browser only; they are not uploaded to GitHub or any server.
         </p>
       </main>
 
@@ -585,6 +585,9 @@
       const clearUpload = document.getElementById("clearProjectUpload");
       const uploadStatus = document.getElementById("projectUploadStatus");
       const fileList = document.getElementById("projectFileList");
+      const DB_NAME = "amp-workbench-project-dropbox";
+      const DB_VERSION = 1;
+      const STORE_NAME = "projectFiles";
 
       function formatBytes(value) {
         if (value < 1024) return `${value} B`;
@@ -593,28 +596,99 @@
         return `${(value / 1024 / 1024 / 1024).toFixed(2)} GB`;
       }
 
-      function renderFiles(fileSource) {
+      function requestResult(request) {
+        return new Promise((resolve, reject) => {
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      function transactionComplete(transaction) {
+        return new Promise((resolve, reject) => {
+          transaction.oncomplete = () => resolve();
+          transaction.onerror = () => reject(transaction.error || new Error("Storage transaction failed."));
+          transaction.onabort = () => reject(transaction.error || new Error("Storage transaction aborted."));
+        });
+      }
+
+      function openProjectDb() {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open(DB_NAME, DB_VERSION);
+          request.onupgradeneeded = () => {
+            const db = request.result;
+            if (!db.objectStoreNames.contains(STORE_NAME)) {
+              db.createObjectStore(STORE_NAME, { keyPath: "path" });
+            }
+          };
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      function storedPath(file) {
+        return file.webkitRelativePath || file.name;
+      }
+
+      async function readSavedFiles() {
+        const db = await openProjectDb();
+        const transaction = db.transaction(STORE_NAME, "readonly");
+        const store = transaction.objectStore(STORE_NAME);
+        const files = await requestResult(store.getAll());
+        db.close();
+        return files;
+      }
+
+      async function saveFiles(fileSource) {
+        const files = Array.from(fileSource || []);
+        const db = await openProjectDb();
+        const transaction = db.transaction(STORE_NAME, "readwrite");
+        const store = transaction.objectStore(STORE_NAME);
+        store.clear();
+        files.forEach((file) => {
+          store.put({
+            path: storedPath(file),
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            lastModified: file.lastModified,
+            blob: file
+          });
+        });
+        await transactionComplete(transaction);
+        db.close();
+        return readSavedFiles();
+      }
+
+      async function clearSavedFiles() {
+        const db = await openProjectDb();
+        const transaction = db.transaction(STORE_NAME, "readwrite");
+        transaction.objectStore(STORE_NAME).clear();
+        await transactionComplete(transaction);
+        db.close();
+      }
+
+      function renderFiles(fileSource, saved = false) {
         const files = Array.from(fileSource || []);
         fileList.replaceChildren();
         clearUpload.disabled = files.length === 0;
 
         if (!files.length) {
-          uploadStatus.textContent = "No project selected.";
+          uploadStatus.textContent = "No project saved in this browser.";
           return;
         }
 
         const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
-        uploadStatus.textContent = `${files.length} file${files.length === 1 ? "" : "s"} staged in browser, ${formatBytes(totalBytes)} total.`;
+        uploadStatus.textContent = `${files.length} file${files.length === 1 ? "" : "s"} ${saved ? "saved" : "staged"} in this browser, ${formatBytes(totalBytes)} total.`;
 
         files
           .slice()
-          .sort((a, b) => (a.webkitRelativePath || a.name).localeCompare(b.webkitRelativePath || b.name))
+          .sort((a, b) => (a.path || a.webkitRelativePath || a.name).localeCompare(b.path || b.webkitRelativePath || b.name))
           .slice(0, 12)
           .forEach((file) => {
             const item = document.createElement("li");
             const name = document.createElement("span");
             const size = document.createElement("span");
-            name.textContent = file.webkitRelativePath || file.name;
+            name.textContent = file.path || file.webkitRelativePath || file.name;
             size.textContent = formatBytes(file.size);
             item.append(name, size);
             fileList.append(item);
@@ -631,13 +705,24 @@
         }
       }
 
+      async function saveAndRender(fileSource) {
+        try {
+          uploadStatus.textContent = "Saving project in this browser...";
+          const savedFiles = await saveFiles(fileSource);
+          renderFiles(savedFiles, true);
+        } catch (error) {
+          uploadStatus.textContent = `Could not save project in this browser: ${error.message}`;
+        }
+      }
+
       chooseZip.addEventListener("click", () => zipInput.click());
       chooseFolder.addEventListener("click", () => folderInput.click());
-      zipInput.addEventListener("change", () => renderFiles(zipInput.files));
-      folderInput.addEventListener("change", () => renderFiles(folderInput.files));
-      clearUpload.addEventListener("click", () => {
+      zipInput.addEventListener("change", () => saveAndRender(zipInput.files));
+      folderInput.addEventListener("change", () => saveAndRender(folderInput.files));
+      clearUpload.addEventListener("click", async () => {
         zipInput.value = "";
         folderInput.value = "";
+        await clearSavedFiles();
         renderFiles([]);
       });
 
@@ -656,7 +741,7 @@
       });
 
       dropzone.addEventListener("drop", (event) => {
-        renderFiles(event.dataTransfer.files);
+        saveAndRender(event.dataTransfer.files);
       });
 
       dropzone.addEventListener("keydown", (event) => {
@@ -665,6 +750,12 @@
           zipInput.click();
         }
       });
+
+      readSavedFiles()
+        .then((files) => renderFiles(files, true))
+        .catch((error) => {
+          uploadStatus.textContent = `Project storage is unavailable in this browser: ${error.message}`;
+        });
     </script>
   </body>
 </html>
