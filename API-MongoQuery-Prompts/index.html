@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AMP WorkBench</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17212b;
+        --muted: #5a6877;
+        --line: #d8dee6;
+        --panel: #ffffff;
+        --wash: #f3f6f9;
+        --accent: #0f766e;
+        --accent-strong: #0b5f59;
+        --warning: #a45314;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--wash);
+        color: var(--ink);
+        line-height: 1.55;
+      }
+
+      a {
+        color: var(--accent-strong);
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        background: #ffffff;
+      }
+
+      .bar {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        min-height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+      }
+
+      .mark {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      nav {
+        display: flex;
+        gap: 18px;
+        font-size: 14px;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 56px 0;
+      }
+
+      .intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+        gap: 32px;
+        align-items: start;
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        font-size: clamp(36px, 7vw, 68px);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 720px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      .actions {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .button {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button.secondary {
+        background: #ffffff;
+        color: var(--accent-strong);
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 22px;
+      }
+
+      .panel h2,
+      .section h2 {
+        margin: 0 0 14px;
+        font-size: 20px;
+      }
+
+      .status-list,
+      .feature-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .status-list li,
+      .feature-list li {
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .status-list li:first-child,
+      .feature-list li:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .label {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .value {
+        display: block;
+        margin-top: 2px;
+        font-weight: 700;
+      }
+
+      .sections {
+        margin-top: 44px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .section {
+        border-top: 3px solid var(--accent);
+        background: #ffffff;
+        padding: 20px;
+      }
+
+      .note {
+        margin-top: 22px;
+        color: var(--warning);
+        font-size: 14px;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        background: #ffffff;
+        color: var(--muted);
+      }
+
+      .foot {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 18px 0;
+        font-size: 14px;
+      }
+
+      @media (max-width: 780px) {
+        .bar {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 0;
+        }
+
+        nav {
+          width: 100%;
+          overflow-x: auto;
+        }
+
+        .intro,
+        .sections {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div class="bar">
+          <div class="brand">
+            <span class="mark">AMP</span>
+            <span>AMP WorkBench</span>
+          </div>
+          <nav aria-label="Primary">
+            <a href="/">Home</a>
+            <a href="https://github.com/nnabdelshahid/API-MongoQuery-Prompts">Repository</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="title">
+          <div>
+            <h1 id="title">API and Mongo workflow workspace.</h1>
+            <p class="lede">
+              AMP WorkBench organizes defect intake, API validation, Mongo evidence,
+              runtime checks, and handoff artifacts into a repeatable project workflow.
+            </p>
+            <div class="actions">
+              <a class="button" href="https://github.com/nnabdelshahid/API-MongoQuery-Prompts">Open Project Repository</a>
+              <a class="button secondary" href="https://github.com/nnabdelshahid/nnabdelshahid.github.io">Open Pages Host</a>
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Project status">
+            <h2>Project Link</h2>
+            <ul class="status-list">
+              <li>
+                <span class="label">GitHub Pages URL</span>
+                <span class="value">nnabdelshahid.github.io/API-MongoQuery-Prompts</span>
+              </li>
+              <li>
+                <span class="label">Publishing Source</span>
+                <span class="value">Public user-site repository</span>
+              </li>
+              <li>
+                <span class="label">Published Content</span>
+                <span class="value">Sanitized project landing page</span>
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="sections" aria-label="Workspace areas">
+          <div class="section">
+            <h2>Workflow Routing</h2>
+            <ul class="feature-list">
+              <li>Defect, story, and task lanes</li>
+              <li>Stage-based evidence tracking</li>
+              <li>Repository and branch handoff context</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h2>Validation Assets</h2>
+            <ul class="feature-list">
+              <li>API request and response evidence</li>
+              <li>Mongo query verification notes</li>
+              <li>Runtime connectivity checks</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h2>Workbench UI</h2>
+            <ul class="feature-list">
+              <li>Local orchestration dashboard</li>
+              <li>Log and event timeline views</li>
+              <li>Manual-first safety gates</li>
+            </ul>
+          </div>
+        </section>
+
+        <p class="note">
+          The full WorkBench application depends on local runtime services and is not
+          hosted from this static GitHub Pages site.
+        </p>
+      </main>
+
+      <footer>
+        <div class="foot">AMP WorkBench project landing page.</div>
+      </footer>
+    </div>
+  </body>
+</html>
