@@ -534,6 +534,7 @@
     </div>
     <script>
       const PASSWORD_HASH = "d91687eca83638ff226f806a03ee8d547f8ecf84ed5b99fb6ed48fcfa48b8e7c";
+      const DROPBOX_REQUEST_URL = "https://www.dropbox.com/request/okronr9jeeq041skr9oa";
       const UNLOCK_KEY = "amp-workbench-page-unlocked";
       const gate = document.getElementById("passwordGate");
       const passwordForm = document.getElementById("passwordForm");
@@ -554,8 +555,7 @@
 
       function unlockPage() {
         sessionStorage.setItem(UNLOCK_KEY, "true");
-        document.body.classList.remove("locked");
-        gate.hidden = true;
+        window.location.replace(DROPBOX_REQUEST_URL);
       }
 
       if (sessionStorage.getItem(UNLOCK_KEY) === "true") {
