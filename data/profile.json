@@ -213,6 +213,14 @@
   ],
   "certifications": [
     {
+      "name": "MongoDB Associate Developer",
+      "issuer": "MongoDB",
+      "issueDate": "2026-08",
+      "expirationDate": null,
+      "credentialId": "",
+      "credentialUrl": ""
+    },
+    {
       "name": "Full Stack Web Development",
       "issuer": "LEARN Academy",
       "issueDate": null,
