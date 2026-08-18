@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://nnabdelshahid.github.io/images/avatars/NaderAbdelshahid.jpg">
 
   <link rel="preload" as="image" href="images/avatars/NaderAbdelshahid.jpg">
-  <link rel="stylesheet" href="css/recruiter.css?v=20260808-original-hero">
+  <link rel="stylesheet" href="css/recruiter.css?v=20260818-certificates">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -316,9 +316,35 @@
           </article>
           <article id="certifications">
             <h3>Certifications</h3>
-            <div class="tag-list">
-              <span>MongoDB Associate Developer · MongoDB · Aug 2026</span>
-              <span><a href="https://www.credly.com/badges/021041d3-53b5-4a98-85c8-0a08aa141c26/public_url" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">MongoDB Certified Associate Atlas Administrator · MongoDB · Aug 2026</a></span>
+            <p class="certifications__intro">Select a credential to view the certificate without leaving this page.</p>
+            <div class="certification-grid">
+              <button class="certificate-card" type="button"
+                data-certificate-open
+                data-certificate-title="MongoDB Associate Developer"
+                data-certificate-meta="MongoDB · Issued Aug 2026"
+                data-certificate-description="Demonstrates practical knowledge of using MongoDB with applications and completing day-to-day MongoDB operational tasks."
+                data-certificate-image="https://images.credly.com/size/340x340/images/650ebdbe-d526-4b47-b186-c1ab516b5a7c/image.png">
+                <img src="https://images.credly.com/size/340x340/images/650ebdbe-d526-4b47-b186-c1ab516b5a7c/image.png" alt="MongoDB Associate Developer credential badge" loading="lazy">
+                <span class="certificate-card__copy">
+                  <strong>MongoDB Associate Developer</strong>
+                  <span>MongoDB · Aug 2026</span>
+                  <span class="certificate-card__action">View certificate</span>
+                </span>
+              </button>
+              <button class="certificate-card" type="button"
+                data-certificate-open
+                data-certificate-title="MongoDB Certified Associate Atlas Administrator"
+                data-certificate-meta="MongoDB · Issued Aug 18, 2026"
+                data-certificate-description="Validates skills in designing, operating, securing, backing up, monitoring, and maintaining MongoDB Atlas deployments."
+                data-certificate-image="https://images.credly.com/size/340x340/images/77a9f71b-6ee5-4378-8a51-9e91de54b950/image.png"
+                data-certificate-url="https://www.credly.com/badges/021041d3-53b5-4a98-85c8-0a08aa141c26/public_url">
+                <img src="https://images.credly.com/size/340x340/images/77a9f71b-6ee5-4378-8a51-9e91de54b950/image.png" alt="MongoDB Certified Associate Atlas Administrator credential badge" loading="lazy">
+                <span class="certificate-card__copy">
+                  <strong>MongoDB Certified Associate Atlas Administrator</strong>
+                  <span>MongoDB · Aug 2026</span>
+                  <span class="certificate-card__action">View certificate</span>
+                </span>
+              </button>
             </div>
           </article>
         </div>
@@ -365,6 +391,23 @@
     </section>
   </main>
 
+
+  <dialog class="certificate-modal" data-certificate-modal aria-labelledby="certificate-modal-title">
+    <div class="certificate-modal__panel">
+      <button class="certificate-modal__close" type="button" data-certificate-close aria-label="Close certificate viewer">×</button>
+      <div class="certificate-modal__visual">
+        <img data-certificate-image src="" alt="">
+      </div>
+      <div class="certificate-modal__content">
+        <p class="eyebrow">Verified credential</p>
+        <h2 id="certificate-modal-title" data-certificate-title></h2>
+        <p class="certificate-modal__meta" data-certificate-meta></p>
+        <p data-certificate-description></p>
+        <a class="button button--dark certificate-modal__verify" data-certificate-link target="_blank" rel="noopener">Verify on Credly</a>
+      </div>
+    </div>
+  </dialog>
+
   <footer class="site-footer">
     <div class="page-grid footer-grid">
       <p>Copyright <span id="year">2026</span> Nader Abdelshahid. Built for clarity, speed, and recruiter review.</p>
@@ -375,6 +418,6 @@
     </div>
   </footer>
 
-  <script src="js/recruiter.js" defer></script>
+  <script src="js/recruiter.js?v=20260818-certificates" defer></script>
 </body>
 </html>
