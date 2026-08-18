@@ -61,30 +61,40 @@ if (certificateModal && certificateOpeners.length) {
   const modalLink = certificateModal.querySelector("[data-certificate-link]");
   const modalClose = certificateModal.querySelector("[data-certificate-close]");
 
+  const clearCertificateHash = () => {
+    if (window.location.hash.startsWith("#certificate-")) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  };
+
   const closeCertificate = () => {
     certificateModal.close();
-    document.body.classList.remove("has-open-modal");
-    certificateReturnFocus?.focus();
+  };
+
+  const openCertificate = (opener, updateHash = true) => {
+    certificateReturnFocus = opener;
+    const title = opener.dataset.certificateTitle || "Certificate";
+    const credentialUrl = opener.dataset.certificateUrl || "";
+    const certificateHash = opener.dataset.certificateHash || "";
+
+    modalImage.src = opener.dataset.certificateImage || "";
+    modalImage.alt = title + " official certificate";
+    modalTitle.textContent = title;
+    modalMeta.textContent = opener.dataset.certificateMeta || "";
+    modalDescription.textContent = opener.dataset.certificateDescription || "";
+    modalLink.hidden = !credentialUrl;
+    modalLink.href = credentialUrl;
+
+    certificateModal.showModal();
+    document.body.classList.add("has-open-modal");
+    if (updateHash && certificateHash) {
+      history.replaceState(null, "", "#" + certificateHash);
+    }
+    modalClose.focus();
   };
 
   certificateOpeners.forEach((opener) => {
-    opener.addEventListener("click", () => {
-      certificateReturnFocus = opener;
-      const title = opener.dataset.certificateTitle || "Certificate";
-      const credentialUrl = opener.dataset.certificateUrl || "";
-
-      modalImage.src = opener.dataset.certificateImage || "";
-      modalImage.alt = title + " credential badge";
-      modalTitle.textContent = title;
-      modalMeta.textContent = opener.dataset.certificateMeta || "";
-      modalDescription.textContent = opener.dataset.certificateDescription || "";
-      modalLink.hidden = !credentialUrl;
-      modalLink.href = credentialUrl;
-
-      certificateModal.showModal();
-      document.body.classList.add("has-open-modal");
-      modalClose.focus();
-    });
+    opener.addEventListener("click", () => openCertificate(opener));
   });
 
   modalClose.addEventListener("click", closeCertificate);
@@ -95,5 +105,21 @@ if (certificateModal && certificateOpeners.length) {
   });
   certificateModal.addEventListener("close", () => {
     document.body.classList.remove("has-open-modal");
+    clearCertificateHash();
+    certificateReturnFocus?.focus();
   });
+
+  const openFromHash = () => {
+    const certificateHash = window.location.hash.slice(1);
+    if (!certificateHash) return;
+    const opener = Array.from(certificateOpeners).find(
+      (item) => item.dataset.certificateHash === certificateHash
+    );
+    if (opener && !certificateModal.open) {
+      openCertificate(opener, false);
+    }
+  };
+
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
 }

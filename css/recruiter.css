@@ -1014,3 +1014,48 @@ body.has-open-modal {
     height: 72px;
   }
 }
+
+
+/* Full certificate viewer */
+.certificate-modal {
+  width: min(1180px, calc(100% - 28px));
+}
+
+.certificate-modal__panel {
+  grid-template-columns: minmax(0, 1.72fr) minmax(280px, 0.68fr);
+}
+
+.certificate-modal__visual {
+  min-height: 0;
+  padding: 18px;
+  background: #f4f6f4;
+}
+
+.certificate-modal__visual img {
+  width: 100%;
+  max-height: calc(100vh - 64px);
+  object-fit: contain;
+}
+
+.certificate-modal__content {
+  padding: 58px 34px 38px;
+}
+
+@media (max-width: 900px) {
+  .certificate-modal__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-modal__visual {
+    padding: 12px;
+  }
+
+  .certificate-modal__visual img {
+    width: 100%;
+    max-height: 58vh;
+  }
+
+  .certificate-modal__content {
+    padding: 26px 24px 28px;
+  }
+}

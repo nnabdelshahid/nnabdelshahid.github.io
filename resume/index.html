@@ -25,6 +25,19 @@
     ul { margin:.35rem 0 .55rem 1.2rem; padding:0; }
     li { margin:.28rem 0; }
     a { color:#155e75; }
+
+    .certificate-open { color:#155e75; text-decoration:underline; text-underline-offset:2px; }
+    .certificate-modal { width:min(1040px, calc(100% - 24px)); max-height:calc(100% - 24px); border:0; border-radius:12px; padding:0; background:#fff; box-shadow:0 24px 70px rgba(0,0,0,.34); }
+    .certificate-modal::backdrop { background:rgba(15,23,42,.78); backdrop-filter:blur(4px); }
+    .certificate-modal__panel { position:relative; }
+    .certificate-modal__visual { padding:16px; background:#f3f4f6; }
+    .certificate-modal__visual img { display:block; width:100%; max-height:calc(100vh - 230px); object-fit:contain; }
+    .certificate-modal__details { padding:20px 26px 24px; }
+    .certificate-modal__details h2 { margin:0 0 .35rem; font-size:1.45rem; text-transform:none; letter-spacing:0; border:0; }
+    .certificate-modal__details p { margin:.25rem 0; }
+    .certificate-modal__verify { display:inline-block; margin-top:.75rem; padding:.65rem .9rem; border-radius:6px; color:#fff; background:#155e75; font-weight:700; text-decoration:none; }
+    .certificate-modal__close { position:absolute; z-index:2; top:12px; right:12px; width:42px; height:42px; border:1px solid #d1d5db; border-radius:50%; background:#fff; font-size:1.6rem; cursor:pointer; }
+    body.has-open-certificate { overflow:hidden; }
     @media (max-width:700px) {
       .resume { margin:0; padding:1.4rem 1rem; box-shadow:none; }
       .toolbar { margin:.75rem auto; }
@@ -35,7 +48,10 @@
       body { background:#fff; font-size:9.5pt; line-height:1.25; }
       .toolbar { display:none; }
       .resume { max-width:none; margin:0; padding:0; box-shadow:none; }
-      .job, .skills p { break-inside:avoid; }
+      .skills p { break-inside:avoid; }
+      .job { break-inside:auto; }
+      .job h3 { break-after:avoid; page-break-after:avoid; }
+      .job li { break-inside:avoid; page-break-inside:avoid; }
       a { color:inherit; text-decoration:none; }
     }
   </style>
@@ -117,9 +133,76 @@
 
     <section class="sec">
       <h2>Certifications</h2>
-      <p><strong>MongoDB Associate Developer</strong> | MongoDB | Aug 2026</p>
-      <p><strong><a href="https://www.credly.com/badges/021041d3-53b5-4a98-85c8-0a08aa141c26/public_url" target="_blank" rel="noopener">MongoDB Certified Associate Atlas Administrator</a></strong> | MongoDB | Aug 2026</p>
+      <p class="certification-entry"><strong><a class="certificate-open" href="../#certificate-associate-developer"
+        data-resume-certificate
+        data-certificate-title="MongoDB Associate Developer"
+        data-certificate-meta="MongoDB | Issued Aug 17, 2026"
+        data-certificate-image="../images/certifications/mongodb-associate-developer-certificate.png"
+        data-certificate-url="https://www.credly.com/badges/e3853ca9-a9d9-4b46-8a95-3d0658c8a63f/public_url">MongoDB Associate Developer</a></strong> | MongoDB | Aug 2026</p>
+      <p class="certification-entry"><strong><a class="certificate-open" href="../#certificate-atlas-administrator"
+        data-resume-certificate
+        data-certificate-title="MongoDB Certified Associate Atlas Administrator"
+        data-certificate-meta="MongoDB | Issued Aug 18, 2026"
+        data-certificate-image="../images/certifications/mongodb-atlas-administrator-certificate.png"
+        data-certificate-url="https://www.credly.com/badges/021041d3-53b5-4a98-85c8-0a08aa141c26/public_url">MongoDB Certified Associate Atlas Administrator</a></strong> | MongoDB | Aug 2026</p>
     </section>
   </main>
+
+  <dialog class="certificate-modal" data-resume-certificate-modal aria-labelledby="resume-certificate-title">
+    <div class="certificate-modal__panel">
+      <button class="certificate-modal__close" type="button" data-resume-certificate-close aria-label="Close certificate viewer">×</button>
+      <div class="certificate-modal__visual">
+        <img data-resume-certificate-image src="" alt="">
+      </div>
+      <div class="certificate-modal__details">
+        <h2 id="resume-certificate-title" data-resume-certificate-title></h2>
+        <p data-resume-certificate-meta></p>
+        <a class="certificate-modal__verify" data-resume-certificate-link target="_blank" rel="noopener">Verify on Credly</a>
+      </div>
+    </div>
+  </dialog>
+
+
+  <script>
+    (() => {
+      const modal = document.querySelector("[data-resume-certificate-modal]");
+      const openers = document.querySelectorAll("[data-resume-certificate]");
+      if (!modal || !openers.length) return;
+
+      const image = modal.querySelector("[data-resume-certificate-image]");
+      const title = modal.querySelector("[data-resume-certificate-title]");
+      const meta = modal.querySelector("[data-resume-certificate-meta]");
+      const link = modal.querySelector("[data-resume-certificate-link]");
+      const close = modal.querySelector("[data-resume-certificate-close]");
+      let returnFocus = null;
+
+      const closeModal = () => modal.close();
+
+      openers.forEach((opener) => {
+        opener.addEventListener("click", (event) => {
+          event.preventDefault();
+          returnFocus = opener;
+          image.src = opener.dataset.certificateImage;
+          image.alt = opener.dataset.certificateTitle + " official certificate";
+          title.textContent = opener.dataset.certificateTitle;
+          meta.textContent = opener.dataset.certificateMeta;
+          link.href = opener.dataset.certificateUrl;
+          modal.showModal();
+          document.body.classList.add("has-open-certificate");
+          close.focus();
+        });
+      });
+
+      close.addEventListener("click", closeModal);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+      modal.addEventListener("close", () => {
+        document.body.classList.remove("has-open-certificate");
+        returnFocus?.focus();
+      });
+    })();
+  </script>
+
 </body>
 </html>
