@@ -47,3 +47,53 @@ if (projectStack && !hasAslProject) {
   `;
   projectStack.appendChild(aslProject);
 }
+
+
+const certificateModal = document.querySelector("[data-certificate-modal]");
+const certificateOpeners = document.querySelectorAll("[data-certificate-open]");
+let certificateReturnFocus = null;
+
+if (certificateModal && certificateOpeners.length) {
+  const modalImage = certificateModal.querySelector("[data-certificate-image]");
+  const modalTitle = certificateModal.querySelector("[data-certificate-title]");
+  const modalMeta = certificateModal.querySelector("[data-certificate-meta]");
+  const modalDescription = certificateModal.querySelector("[data-certificate-description]");
+  const modalLink = certificateModal.querySelector("[data-certificate-link]");
+  const modalClose = certificateModal.querySelector("[data-certificate-close]");
+
+  const closeCertificate = () => {
+    certificateModal.close();
+    document.body.classList.remove("has-open-modal");
+    certificateReturnFocus?.focus();
+  };
+
+  certificateOpeners.forEach((opener) => {
+    opener.addEventListener("click", () => {
+      certificateReturnFocus = opener;
+      const title = opener.dataset.certificateTitle || "Certificate";
+      const credentialUrl = opener.dataset.certificateUrl || "";
+
+      modalImage.src = opener.dataset.certificateImage || "";
+      modalImage.alt = title + " credential badge";
+      modalTitle.textContent = title;
+      modalMeta.textContent = opener.dataset.certificateMeta || "";
+      modalDescription.textContent = opener.dataset.certificateDescription || "";
+      modalLink.hidden = !credentialUrl;
+      modalLink.href = credentialUrl;
+
+      certificateModal.showModal();
+      document.body.classList.add("has-open-modal");
+      modalClose.focus();
+    });
+  });
+
+  modalClose.addEventListener("click", closeCertificate);
+  certificateModal.addEventListener("click", (event) => {
+    if (event.target === certificateModal) {
+      closeCertificate();
+    }
+  });
+  certificateModal.addEventListener("close", () => {
+    document.body.classList.remove("has-open-modal");
+  });
+}
