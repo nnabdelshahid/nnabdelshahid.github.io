@@ -1,0 +1,99 @@
+{
+  "name": "Nader Abdelshahid",
+  "headline": "Software Engineer | Java and Spring Boot | Distributed Payments and Backend Systems",
+  "summary": "Software Engineer with 5+ years of software development experience, including 4+ years building Java/Spring Boot backend services for FedNow and TCH RTP real-time payments. Delivers REST APIs, ISO 20022 processing, Kafka event mappings, MongoDB persistence, CI/CD, and security remediation in a regulated financial environment. Built reusable automation that reduced recurring API and database validation time by 67%, from ~30 minutes to ~10 minutes.",
+  "skills": {
+    "Backend": [
+      "Java",
+      "Spring Boot",
+      "Spring MVC",
+      "REST APIs",
+      "microservices",
+      "Kafka",
+      "distributed systems"
+    ],
+    "Payments and Data": [
+      "FedNow",
+      "TCH RTP v3.0",
+      "ISO 20022",
+      "MongoDB",
+      "Oracle/SQL"
+    ],
+    "Testing and Delivery": [
+      "JUnit",
+      "Mockito",
+      "Postman/Newman",
+      "Jenkins",
+      "SonarQube",
+      "Black Duck",
+      "Checkmarx",
+      "Gradle",
+      "Git"
+    ],
+    "Additional": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Ruby on Rails"
+    ]
+  },
+  "contact": "San Diego, CA | (619) 953-7021 | NNAbdelshahid@gmail.com | linkedin.com/in/nnabdelshahid",
+  "experience": [
+    {
+      "company": "Wells Fargo",
+      "title": "Software Engineer",
+      "startDate": "2022-08",
+      "endDate": null,
+      "location": "Remote",
+      "bullets": [
+        "Built reusable Postman/Newman and MongoDB automation that cut recurring API/database validation time by 67%, from ~30 minutes to ~10 minutes, and standardized review evidence.",
+        "Develop and maintain Java/Spring Boot backend services and REST APIs for distributed FedNow and TCH RTP v3.0 payments, resolving defects across credit transfers, returns, request-for-payment (RFP), and administrative-message workflows.",
+        "Delivered ISO 20022 updates for pacs.008, pacs.002, pacs.004, camt.029, camt.035, pain.014, and admi.002, integrating Kafka event mappings, MongoDB persistence, and network-specific processing rules.",
+        "Expanded JUnit coverage across payment mappers, controllers, exception handlers, Kafka publishers, and FedNow/TCH processors to strengthen regression testing for payment-service changes.",
+        "Remediated security and software composition analysis findings using Black Duck and Checkmarx scan results across credit-transfer, administrative-message, and return-of-funds services.",
+        "Validated Jenkins/SonarQube CI/CD quality gates and service changes in DEV, SIT, and UAT; collaborated with engineering, risk, compliance, network, and platform teams on issue resolution and controlled releases."
+      ]
+    },
+    {
+      "company": "Self-Employed",
+      "title": "Freelance Software Developer",
+      "startDate": "2019",
+      "endDate": null,
+      "location": "",
+      "bullets": [
+        "Develop full-stack web projects using JavaScript, React, Ruby on Rails, REST APIs, and database-backed applications."
+      ]
+    },
+    {
+      "company": "DateSpot, Victorise & Notch8",
+      "title": "Software Engineer / Consultant",
+      "startDate": "2020",
+      "endDate": "2020",
+      "location": "",
+      "bullets": [
+        "Developed and refactored web and mobile applications using React, React Native, AngularJS, Ionic, and Ruby on Rails; contributed to testing, debugging, documentation, and collaborative development workflows."
+      ]
+    }
+  ],
+  "project": {
+    "title": "API and Database Automation Workbench — Independent Personal Project",
+    "bullets": [
+      "Built a modular developer workbench with a Spring Boot backend and React/Vite interface to orchestrate runtime checks, Postman/Newman API execution, MongoDB validation, and JUnit runs.",
+      "Integrated CI/CD quality checks, redacted runtime logs, and evidence packaging into reusable workflows to make execution repeatable and engineering review traceable."
+    ]
+  },
+  "education": [
+    "LEARN Academy: Full Stack Web Development, 480+ hours | San Diego, CA",
+    "Rochester Institute of Technology: B.S. Biology, 2014; A.A.S. Laboratory Science Technology, 2012"
+  ],
+  "certifications": [
+    "MongoDB Associate Developer",
+    "MongoDB Certified Associate Atlas Administrator"
+  ],
+  "certificationDate": "2026-08",
+  "awards": [
+    "Wells Fargo Team Spotlight Award — 2024",
+    "Wells Fargo Team Spotlight Award — 2025"
+  ],
+  "pdfSha256": "ffe7be8b11e838a1e701cce3e7ff5e9f2e850ceffd04493403d366198ef5fe23"
+}
