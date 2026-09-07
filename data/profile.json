@@ -1,5 +1,5 @@
 {
-  "summary": "Software Engineer focused on secure, resilient payment systems and scalable web applications. I build reliable products with modern JavaScript, React, and backend engineering best practices.",
+  "summary": "Software Engineer with 5+ years of software development experience, including 4+ years building Java/Spring Boot backend services for FedNow and TCH RTP real-time payments. Delivers REST APIs, ISO 20022 processing, Kafka event mappings, MongoDB persistence, CI/CD, and security remediation in a regulated financial environment. Built reusable automation that reduced recurring API and database validation time by 67%, from ~30 minutes to ~10 minutes.",
   "contact": {
     "email": "nader.abdelshahid@wellsfargo.com",
     "phone": "+1 (619) 953-7021",
@@ -13,40 +13,24 @@
       "title": "Software Engineer",
       "startDate": "2022-08",
       "endDate": null,
-      "location": "Chandler, Arizona, United States",
-      "description": "Build and maintain instant payments services supporting FedNow and RTP message flows, with a focus on reliability, compliance, and performance. Deliver production features through sprint planning, automated testing, and controlled deployments while partnering with cross-functional teams on risk controls, resiliency, and platform modernization."
+      "location": "Remote",
+      "description": "Built reusable Postman/Newman and MongoDB automation that cut recurring API/database validation time by 67%, from ~30 minutes to ~10 minutes, and standardized review evidence.\nDevelop and maintain Java/Spring Boot backend services and REST APIs for distributed FedNow and TCH RTP v3.0 payments, resolving defects across credit transfers, returns, request-for-payment (RFP), and administrative-message workflows.\nDelivered ISO 20022 updates for pacs.008, pacs.002, pacs.004, camt.029, camt.035, pain.014, and admi.002, integrating Kafka event mappings, MongoDB persistence, and network-specific processing rules.\nExpanded JUnit coverage across payment mappers, controllers, exception handlers, Kafka publishers, and FedNow/TCH processors to strengthen regression testing for payment-service changes.\nRemediated security and software composition analysis findings using Black Duck and Checkmarx scan results across credit-transfer, administrative-message, and return-of-funds services.\nValidated Jenkins/SonarQube CI/CD quality gates and service changes in DEV, SIT, and UAT; collaborated with engineering, risk, compliance, network, and platform teams on issue resolution and controlled releases."
     },
     {
-      "company": "Self-employed",
+      "company": "Self-Employed",
       "title": "Freelance Software Developer",
-      "startDate": "2019-11",
+      "startDate": "2019",
       "endDate": null,
       "location": "",
-      "description": ""
+      "description": "Develop full-stack web projects using JavaScript, React, Ruby on Rails, REST APIs, and database-backed applications."
     },
     {
-      "company": "DateSpot",
-      "title": "Software Development Consultant",
-      "startDate": "2020-06",
-      "endDate": "2020-08",
+      "company": "DateSpot, Victorise & Notch8",
+      "title": "Software Engineer / Consultant",
+      "startDate": "2020",
+      "endDate": "2020",
       "location": "",
-      "description": "Developed and debugged Datespot web applications utilizing resources including Asana and DigitalOcean, which making it easier to collect data. Atom tool was used to refactor the Datespot web application web-friendly and easier to use."
-    },
-    {
-      "company": "Victorise",
-      "title": "Software Engineer",
-      "startDate": "2020-05",
-      "endDate": "2020-06",
-      "location": "Carlsbad, California, United States",
-      "description": "Victorise web applications were developed and debugged utilizing resources including AngularJS and Ionic framework as well as utilizing React-Native to develop and debug the Victorise mobile application. Resources including SourceTree, Bitbucket, Trello, and Robo3t were used in this project to communicate with the team members to find the solutions for this application. Ionic was used to refactor the codes and develop a web-friendly website to make the Victorise web application effective."
-    },
-    {
-      "company": "Notch8",
-      "title": "Software Engineer",
-      "startDate": "2020-02",
-      "endDate": "2020-04",
-      "location": "San Diego, California, United States",
-      "description": "REU Manager web application was actively developed utilizing RSpec to provide 100% testing coverage and SCRUM development practices was used to make appropriate adjustments based on the team hypothesis and experience. Errors in the documents and manuals was adjusted for the new user to be able to understand the program."
+      "description": "Developed and refactored web and mobile applications using React, React Native, AngularJS, Ionic, and Ruby on Rails; contributed to testing, debugging, documentation, and collaborative development workflows."
     },
     {
       "company": "LEARN Academy",
@@ -54,7 +38,7 @@
       "startDate": "2019-11",
       "endDate": "2020-02",
       "location": "San Diego, California, United States",
-      "description": "Learn Academy an intensive full-time coding boot camp that teaches skills from coding itself, to pair programming. The boot camp solidifies interpersonal communication and working as a pair, a mob, or even alone. \u2022\tCompleted over 480 hours of direct coding in an intensive web development boot camp. \u2022\tGained proficiency in JavaScript, Ruby, and React while creating full-stack programs.  \u2022\tEmployed effective communication and cooperation over pair and mob programming assignments."
+      "description": "Learn Academy an intensive full-time coding boot camp that teaches skills from coding itself, to pair programming. The boot camp solidifies interpersonal communication and working as a pair, a mob, or even alone. •\tCompleted over 480 hours of direct coding in an intensive web development boot camp. •\tGained proficiency in JavaScript, Ruby, and React while creating full-stack programs.  •\tEmployed effective communication and cooperation over pair and mob programming assignments."
     },
     {
       "company": "Jani-King of Cleveland",
@@ -100,14 +84,14 @@
   "education": [
     {
       "school": "Rochester Institute of Technology",
-      "degree": "Associate of Applied Science",
+      "degree": "Associate of Applied Science, Laboratory Science Technology",
       "startDate": "2009",
       "endDate": "2012",
       "description": ""
     },
     {
       "school": "Rochester Institute of Technology",
-      "degree": "Bachelor of Science",
+      "degree": "Bachelor of Science, Biology",
       "startDate": "2012-09",
       "endDate": "2014-05",
       "description": ""
@@ -115,100 +99,100 @@
   ],
   "skills": [
     {
-      "name": "JavaScript",
-      "level": 75
+      "name": "Java"
     },
     {
-      "name": "TypeScript",
-      "level": 75
+      "name": "Spring Boot"
     },
     {
-      "name": "React.js",
-      "level": 75
+      "name": "Spring MVC"
     },
     {
-      "name": "React Native",
-      "level": 75
+      "name": "REST APIs"
     },
     {
-      "name": "Ruby on Rails",
-      "level": 75
+      "name": "microservices"
     },
     {
-      "name": "Java",
-      "level": 75
+      "name": "Kafka"
     },
     {
-      "name": "Spring Boot",
-      "level": 75
+      "name": "distributed systems"
     },
     {
-      "name": "HTML",
-      "level": 75
+      "name": "FedNow"
     },
     {
-      "name": "CSS",
-      "level": 75
+      "name": "TCH RTP v3.0"
     },
     {
-      "name": "Sass",
-      "level": 75
+      "name": "ISO 20022"
     },
     {
-      "name": "REST APIs",
-      "level": 75
+      "name": "MongoDB"
     },
     {
-      "name": "PostgreSQL",
-      "level": 75
+      "name": "Oracle/SQL"
     },
     {
-      "name": "MySQL",
-      "level": 75
+      "name": "JUnit"
     },
     {
-      "name": "MongoDB",
-      "level": 75
+      "name": "Mockito"
     },
     {
-      "name": "Jenkins",
-      "level": 75
+      "name": "Postman/Newman"
     },
     {
-      "name": "Docker",
-      "level": 75
+      "name": "Jenkins"
     },
     {
-      "name": "Git",
-      "level": 75
+      "name": "SonarQube"
     },
     {
-      "name": "GitHub",
-      "level": 75
+      "name": "Black Duck"
     },
     {
-      "name": "Bitbucket",
-      "level": 75
+      "name": "Checkmarx"
     },
     {
-      "name": "RSpec",
-      "level": 75
+      "name": "Gradle"
     },
     {
-      "name": "Jest",
-      "level": 75
+      "name": "Git"
     },
     {
-      "name": "Postman",
-      "level": 75
+      "name": "JavaScript"
     },
     {
-      "name": "Scrum",
-      "level": 75
+      "name": "React"
     },
     {
-      "name": "Agile Methodologies",
-      "level": 75
+      "name": "Node.js"
+    },
+    {
+      "name": "Ruby on Rails"
+    },
+    {
+      "name": "React Native"
+    },
+    {
+      "name": "AngularJS"
+    },
+    {
+      "name": "Ionic"
+    },
+    {
+      "name": "RSpec"
+    },
+    {
+      "name": "Jest"
+    },
+    {
+      "name": "Bitbucket"
+    },
+    {
+      "name": "Scrum"
     }
   ],
   "certifications": [
@@ -235,6 +219,14 @@
       "expirationDate": null,
       "credentialId": "",
       "credentialUrl": "https://www.linkedin.com/learning/certificates/a9302aff395ab48c0b98199b5b4cca6bd5ea940d7f857b3d7a73c50fabef4577"
+    },
+    {
+      "name": "MongoDB Certified Associate Atlas Administrator",
+      "issuer": "MongoDB",
+      "issueDate": "2026-08",
+      "expirationDate": null,
+      "credentialId": "",
+      "credentialUrl": ""
     }
   ],
   "languages": [
@@ -269,23 +261,27 @@
       "description": "Member of National Society of Colligate Scholarship Lucille R Jennin Scholarship M &M Forman Scholarship NTID Science and Engineer Scholarship Louis Wolk Scholarship"
     },
     {
-      "title": "Team Spotlight Award",
-      "issuer": "",
-      "date": null,
-      "description": "RTPAY Rewrite initiative was started early this year where the whole team was involved in rewriting the legacy Instant Payments platform from Oracle Service Bus to open technology tech stack of Spring Boot and Reactive programming. Some of the key advantages of this initiative are common code base across different networks, high throughput, quicker response times and overall, extremely scalable, and maintainable platform. The new platform supports 400 TPS for throughput processing making it one of the first few applications in PTCT To achieve that. For all the hard work and long hours spent by you in making this project a success."
+      "title": "Wells Fargo Team Spotlight Award",
+      "issuer": "Wells Fargo",
+      "date": "2024",
+      "description": ""
+    },
+    {
+      "title": "Wells Fargo Team Spotlight Award",
+      "issuer": "Wells Fargo",
+      "date": "2025",
+      "description": ""
     }
   ],
-  "caseStudies": [
+  "caseStudies": [],
+  "headline": "Software Engineer | Java and Spring Boot | Distributed Payments and Backend Systems",
+  "projects": [
     {
-      "title": "Improved web app loading and responsiveness",
-      "company": "DateSpot",
-      "role": "Software Development Consultant",
-      "startDate": "2020-07",
-      "endDate": "2020-09",
-      "problem": "Initial load and navigation felt slow on 3G connections and mid-tier devices.",
-      "approach": "Audited bundle, reduced unused JS/CSS, added image optimization/lazy loading, deferred non-critical scripts, and tuned caching.",
-      "impact": "Perceived performance improved with faster first paint and smoother interactions. Replace with your exact metrics.",
-      "link": ""
+      "title": "API and Database Automation Workbench — Independent Personal Project",
+      "bullets": [
+        "Built a modular developer workbench with a Spring Boot backend and React/Vite interface to orchestrate runtime checks, Postman/Newman API execution, MongoDB validation, and JUnit runs.",
+        "Integrated CI/CD quality checks, redacted runtime logs, and evidence packaging into reusable workflows to make execution repeatable and engineering review traceable."
+      ]
     }
   ]
 }
