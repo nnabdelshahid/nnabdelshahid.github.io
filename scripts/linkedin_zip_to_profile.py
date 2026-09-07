@@ -167,6 +167,7 @@ def main():
     repo_root = os.path.dirname(os.path.abspath(__file__))
     repo_root = os.path.dirname(repo_root)
     profile_path = os.path.join(repo_root, 'data', 'profile.json')
+    output_path = os.path.join(repo_root, 'data', 'profile.imported.json')
 
     positions = education = skills = certifications = languages = honors = None
     profile_rows = summary_rows = emails_rows = phones_rows = None
@@ -252,11 +253,11 @@ def main():
 
     # Write back
     os.makedirs(os.path.dirname(profile_path), exist_ok=True)
-    with open(profile_path, 'w', encoding='utf-8') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(profile, f, indent=2, ensure_ascii=False)
 
     # Report
-    print('Wrote data/profile.json')
+    print('Wrote data/profile.imported.json. Review against resume/resume.json before merging; the published profile was not overwritten.')
     print('Counts:', {
         'experience': len(profile.get('experience', [])),
         'education': len(profile.get('education', [])),
@@ -268,3 +269,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
