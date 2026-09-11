@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeploymentPlatform Engineering Case Study | Nader Abdelshahid</title>
+  <meta name="description" content="DeploymentPlatform is Nader Abdelshahid's FastAPI deployment control-plane project with explicit lifecycle states, encrypted secrets, provider abstraction, health gates, usage estimates, and billable-provisioning approval.">
+  <link rel="canonical" href="https://nnabdelshahid.github.io/DeploymentPlatform/">
+  <link rel="stylesheet" href="../css/case-study.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="brand" href="../">Nader Abdelshahid</a>
+      <a href="../#projects">Back to selected work</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <p class="eyebrow">Engineering case study · Private source · In development</p>
+        <h1>DeploymentPlatform</h1>
+        <p class="hero__lead">A backend control plane for managing deployment records, provider operations, protected inference workloads, and cost-aware lifecycle transitions.</p>
+        <div class="facts" aria-label="Project facts">
+          <div class="fact"><span>API</span><strong>Python and FastAPI</strong></div>
+          <div class="fact"><span>Lifecycle</span><strong>Explicit deployment state machine</strong></div>
+          <div class="fact"><span>Provider</span><strong>Runpod integration with adapter boundary</strong></div>
+          <div class="fact"><span>Storage</span><strong>SQLite development and PostgreSQL compatibility</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell intro-grid">
+        <div>
+          <p class="eyebrow">Problem</p>
+          <h2>Provisioning is only one step in a trustworthy deployment lifecycle.</h2>
+        </div>
+        <p>DeploymentPlatform models the control-plane responsibilities around infrastructure: configuration, secrets, estimates, approvals, state changes, health checks, logs, usage records, and teardown. The goal is to make billable and operational transitions explicit instead of hiding them behind a single deploy action.</p>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <div class="shell detail-grid">
+        <div>
+          <p class="eyebrow">Lifecycle</p>
+          <h2>State transitions are validated before provider actions run.</h2>
+          <p class="status-note">The service tracks deployments from creation through queueing, provisioning, build, startup, health checking, running, stop, restart, failure, and deletion. Invalid transitions are rejected and state changes produce operational events.</p>
+        </div>
+        <div class="architecture">
+          <ol>
+            <li><strong>Configure</strong> the project, workload, provider, compute, region, runtime, and environment.</li>
+            <li><strong>Estimate</strong> current GPU and storage cost through the provider adapter.</li>
+            <li><strong>Approve</strong> a time-limited, configuration-bound estimate before any billable provisioning.</li>
+            <li><strong>Provision and verify</strong> the workload, advancing to running only after authenticated health checks pass.</li>
+            <li><strong>Operate</strong> through logs, events, usage estimates, stop, restart, delete, and idle-stop behavior.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <p class="eyebrow">Engineering decisions</p>
+        <h2>Cost, health, and credentials are first-class control-plane concerns.</h2>
+        <div class="cards">
+          <article class="card"><h3>Approval before spend</h3><p>Billable provisioning requires explicit approval against a current estimate bound to the deployment configuration. Expired, changed, or previously consumed estimates are rejected.</p></article>
+          <article class="card"><h3>Protected inference</h3><p>The Runpod adapter provisions a bearer-authenticated gateway that accepts only approved inference routes and the configured model; Ollama remains loopback-only behind the gateway.</p></article>
+          <article class="card"><h3>Encrypted secrets</h3><p>Deployment secrets are encrypted at rest and are not returned by the environment API. Events and logs use redaction helpers before persistence.</p></article>
+          <article class="card"><h3>Health-gated state</h3><p>A deployment becomes running only after provider health checks pass. Stop, restart, delete, failure handling, and idle-stop behavior follow defined lifecycle transitions.</p></article>
+        </div>
+        <div class="tag-list" aria-label="Technologies">
+          <span>Python</span><span>FastAPI</span><span>Runpod</span><span>Ollama</span><span>Docker</span><span>SQLite</span><span>PostgreSQL</span><span>Encrypted Secrets</span><span>GitHub Actions</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="shell"><span>DeploymentPlatform engineering case study</span><a href="../">Nader Abdelshahid portfolio</a></div></footer>
+</body>
+</html>

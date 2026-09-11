@@ -1,5 +1,81 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GodModeAI</title><style>body{margin:0;background:#080b10;color:#eef3f7;font:16px system-ui;display:grid;min-height:100vh;place-items:center}.card{max-width:680px;padding:48px;border:1px solid #263241;border-radius:20px;background:#10161f}h1{font-size:48px;margin:0 0 12px;color:#6ee7c7}p{line-height:1.6;color:#b8c2cf}label{display:block;margin-top:28px;font-size:13px}input{box-sizing:border-box;width:100%;margin:8px 0;padding:14px;border:1px solid #36485c;border-radius:10px;background:#080b10;color:white}button{padding:13px 20px;border:0;border-radius:10px;background:#6ee7c7;color:#07110e;font-weight:700}</style></head>
-<body><main class="card"><small>USER-OWNED AI OPERATING ENVIRONMENT</small><h1>GodModeAI</h1><p>This GitHub Pages site is the static entry point. The authenticated Python agent backend, project workspaces, memory, and inference run on secured compute.</p><label for="backend">Your secured GodModeAI backend URL</label><input id="backend" type="url" placeholder="https://godmode.example.com/app"><button id="open">Open GodModeAI</button><p><small>The URL is stored only in this browser. Authentication happens on your backend; no token is stored here.</small></p></main><script>const input=document.getElementById('backend');input.value=localStorage.getItem('godmode-backend')||'';document.getElementById('open').onclick=()=>{const value=input.value.trim();if(!/^https:\/\//i.test(value)){alert('Use an HTTPS backend URL.');return}localStorage.setItem('godmode-backend',value);location.href=value}</script></body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GodModeAI Engineering Case Study | Nader Abdelshahid</title>
+  <meta name="description" content="GodModeAI is Nader Abdelshahid's local-first AI coding and computer-agent environment, built with Python, FastAPI, Ollama, WebView2, secure inference routing, scoped permissions, audit logging, and rollback.">
+  <link rel="canonical" href="https://nnabdelshahid.github.io/GodModeAI/">
+  <link rel="stylesheet" href="../css/case-study.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="brand" href="../">Nader Abdelshahid</a>
+      <a href="../#projects">Back to selected work</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <p class="eyebrow">Engineering case study · Private source · Active development</p>
+        <h1>GodModeAI</h1>
+        <p class="hero__lead">A local-first AI coding and computer-agent environment that puts one observable, permission-aware agent engine behind terminal, authenticated web, and Windows desktop interfaces.</p>
+        <div class="facts" aria-label="Project facts">
+          <div class="fact"><span>Backend</span><strong>Python and FastAPI</strong></div>
+          <div class="fact"><span>Interfaces</span><strong>Terminal, web, WinForms and WebView2</strong></div>
+          <div class="fact"><span>Inference</span><strong>Local Ollama or protected remote HTTPS</strong></div>
+          <div class="fact"><span>Quality</span><strong>Automated tests, CI, containers and rollback</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell intro-grid">
+        <div>
+          <p class="eyebrow">Problem</p>
+          <h2>Useful agent automation needs boundaries operators can see and control.</h2>
+        </div>
+        <p>GodModeAI explores how a coding agent can work across local and hosted environments without treating unrestricted tool access as a default. The project centers explicit capabilities, project isolation, observable execution, secure inference routing, and recoverable changes.</p>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <div class="shell detail-grid">
+        <div>
+          <p class="eyebrow">Architecture</p>
+          <h2>One backend, multiple clients, two inference paths.</h2>
+          <p class="status-note">A shared FastAPI service exposes authenticated APIs for the terminal, browser UI, and native Windows client. Local projects stay on the workstation through an outbound, project-scoped Local Bridge; remote projects run in isolated authorized workspaces.</p>
+        </div>
+        <div class="architecture">
+          <ol>
+            <li><strong>Clients</strong> submit work through the terminal, authenticated web UI, or WinForms/WebView2 desktop application.</li>
+            <li><strong>Agent engine</strong> applies Ask, Plan, Edit, Autonomous Run, or Coding Team behavior with capability evaluation and structured operational events.</li>
+            <li><strong>Inference router</strong> selects local Ollama or an authenticated remote gateway according to the configured routing and fallback policy.</li>
+            <li><strong>Safety services</strong> contain workspace access, redact secrets, record audit evidence, and create checkpoints before approved mutation.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <p class="eyebrow">Engineering decisions</p>
+        <h2>Designed for observable and recoverable operation.</h2>
+        <div class="cards">
+          <article class="card"><h3>Permission-aware modes</h3><p>Read-only modes cannot mutate. Edit and autonomous modes construct a plan, request scoped approval, create a checkpoint, and preserve rollback information.</p></article>
+          <article class="card"><h3>Workspace safeguards</h3><p>Path containment, traversal protection, executable allowlisting, no-shell subprocesses, timeouts, output limits, Git safeguards, and secret redaction constrain local tool execution.</p></article>
+          <article class="card"><h3>Operational visibility</h3><p>Ordered task and tool events, audit records, persistent memory, health reporting, and provider status make execution traceable across interfaces.</p></article>
+          <article class="card"><h3>Deployable persistence</h3><p>SQLite supports local use, while hosted configuration accepts PostgreSQL-compatible storage. Docker and GitHub Actions cover container and test workflows.</p></article>
+        </div>
+        <div class="tag-list" aria-label="Technologies">
+          <span>Python</span><span>FastAPI</span><span>Ollama</span><span>gpt-oss:20b</span><span>WinForms</span><span>WebView2</span><span>SQLite</span><span>PostgreSQL</span><span>Docker</span><span>GitHub Actions</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="shell"><span>GodModeAI engineering case study</span><a href="../">Nader Abdelshahid portfolio</a></div></footer>
+</body>
 </html>
