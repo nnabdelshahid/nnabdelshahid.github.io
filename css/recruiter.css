@@ -460,6 +460,56 @@ p {
   overflow: hidden;
 }
 
+.architecture-panel {
+  min-height: 294px;
+  padding: 34px;
+  display: grid;
+  gap: 14px;
+  place-content: center;
+  color: var(--white);
+  text-align: center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(56, 189, 175, 0.26), transparent 34%),
+    linear-gradient(145deg, #10252b, #142f3c 58%, #1a4351);
+}
+
+.architecture-panel__label {
+  color: #9de3d7;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+}
+
+.architecture-panel__clients,
+.architecture-panel__providers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.architecture-panel__clients b,
+.architecture-panel__providers b,
+.architecture-panel > strong {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+}
+
+.architecture-panel > strong {
+  padding: 13px 16px;
+  background: rgba(157, 227, 215, 0.14);
+  font-size: 16px;
+}
+
+.architecture-panel__flow {
+  color: #9de3d7;
+  font-size: 18px;
+  line-height: 1;
+}
+
 .feature-card img {
   width: 100%;
   aspect-ratio: 16 / 8;
@@ -510,6 +560,19 @@ p {
   min-height: 108px;
   border-radius: 8px;
   object-fit: cover;
+}
+
+.project-card__mark {
+  width: 118px;
+  min-height: 108px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: #d8fff7;
+  background: linear-gradient(145deg, #12333a, #1b5760);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
 }
 
 .project-card h3 {
@@ -813,6 +876,11 @@ p {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
+  }
+
+  .project-card__mark {
+    width: 100%;
+    min-height: 108px;
   }
 
   .footer-grid {

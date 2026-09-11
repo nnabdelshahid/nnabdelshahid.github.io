@@ -20,7 +20,12 @@ filesystem because browser path and fetch behavior differs from GitHub Pages.
 - `css/` and `js/` — shared styles and browser behavior
 - `data/` — structured public profile content
 - `resume/` — web resume
+- `GodModeAI/` — local-first AI-agent engineering case study
+- `DeploymentPlatform/` — deployment control-plane engineering case study
 - `API-MongoQuery-Prompts/` — vendor-neutral Banking WorkBench case study
+- `Continuum/` — deterministic operations framework case study
+- `SellFuse/`, `BuyFuse/`, and `CenterFuse/` — private product-family overviews
+- `Nader-Studio/` — professional software studio overview
 - `.github/workflows/` — repository validation and Pages automation
 
 ## Content and security

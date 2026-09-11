@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nader Abdelshahid | Software Engineer</title>
-  <meta name="description" content="Nader Abdelshahid is a Java/Spring Boot software engineer developing distributed FedNow and TCH RTP payment services with REST APIs, ISO 20022, Kafka, MongoDB, CI/CD, and security remediation.">
+  <meta name="description" content="Nader Abdelshahid is a Java/Spring Boot software engineer building distributed payment services and local-first AI-agent infrastructure with REST APIs, ISO 20022, Kafka, MongoDB, Python, FastAPI, and Docker.">
   <meta name="author" content="Nader Abdelshahid">
   <meta name="theme-color" content="#111719">
   <link rel="canonical" href="https://nnabdelshahid.github.io/">
@@ -138,7 +138,7 @@
           <p class="eyebrow">Software Engineer | Java and Spring Boot | Distributed Payments and Backend Systems</p>
           <h1>Nader Abdelshahid</h1>
           <p class="hero__lead">I develop Java/Spring Boot backend services for distributed FedNow and TCH RTP real-time payments.</p>
-          <p class="hero__summary">5+ years of software development experience, including 4+ years with Java/Spring Boot. My work spans REST APIs, ISO 20022, Kafka, MongoDB, CI/CD, and security remediation in a regulated financial environment.</p>
+          <p class="hero__summary">5+ years of software development experience, including 4+ years with Java/Spring Boot. My work spans REST APIs, ISO 20022, Kafka, MongoDB, CI/CD, and security remediation in a regulated financial environment. I also build local-first AI-agent and deployment infrastructure with Python, FastAPI, and Docker.</p>
 
           <div class="hero__actions" aria-label="Primary actions">
             <a class="button button--gold" href="resume/Nader_Abdelshahid_Resume.pdf">
@@ -226,61 +226,105 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">Selected work</p>
-            <h2>Projects that show the path from fundamentals to production systems.</h2>
+            <h2>Backend and infrastructure projects built around explicit, secure operations.</h2>
           </div>
-          <p>Enterprise payment work cannot be shown as screenshots, so these public projects act as a compact code-and-UI archive while the experience section carries the current professional story.</p>
+          <p>These independent projects show architecture, testing, deployment, and safety decisions without exposing employer systems or private product strategy.</p>
         </div>
 
         <div class="featured-work">
           <article class="feature-card">
-            <img src="images/portfolio/gallery/g-LEARN.jpg" alt="LEARN Students project screenshot" loading="lazy">
+            <div class="architecture-panel" role="img" aria-label="GodModeAI architecture: terminal, desktop, and authenticated web interfaces connect to one agent engine, which routes inference to local Ollama or a protected remote gateway">
+              <span class="architecture-panel__label">LOCAL-FIRST AGENT ARCHITECTURE</span>
+              <div class="architecture-panel__clients"><b>Terminal</b><b>Windows Desktop</b><b>Authenticated Web</b></div>
+              <div class="architecture-panel__flow" aria-hidden="true">↓</div>
+              <strong>Python / FastAPI Agent Engine</strong>
+              <div class="architecture-panel__flow" aria-hidden="true">↓</div>
+              <div class="architecture-panel__providers"><b>Local Ollama</b><b>Protected Remote Gateway</b></div>
+            </div>
             <div class="feature-card__body">
-              <p class="card-kicker">Full-stack platform</p>
-              <h3>LEARN Students</h3>
-              <p>Open-source student learning platform with database-backed content, authentication-oriented flows, and full-stack delivery patterns.</p>
+              <p class="card-kicker">Featured project · Private source</p>
+              <h3>GodModeAI</h3>
+              <p>A local-first AI coding and computer-agent environment. One FastAPI agent backend serves terminal, authenticated web, and Windows WebView2 interfaces while routing inference between local Ollama and a protected remote HTTPS gateway.</p>
+              <p>Project isolation, scoped permissions, event streaming, audit logging, persistent memory, checkpoints, and rollback keep tool use observable and recoverable.</p>
               <div class="tag-list" aria-label="Project technologies">
-                <span>React</span>
-                <span>Ruby on Rails</span>
-                <span>REST APIs</span>
+                <span>Python</span>
+                <span>FastAPI</span>
+                <span>Ollama</span>
+                <span>WebView2</span>
+                <span>Docker</span>
               </div>
-              <a class="text-link" href="https://github.com/NNAbdelshahid" target="_blank" rel="noopener">View GitHub work</a>
+              <a class="text-link" href="GodModeAI/">Read the case study</a>
             </div>
           </article>
 
           <div class="project-stack" aria-label="Additional projects">
             <article class="project-card">
-              <img src="images/portfolio/gallery/g-sonic.jpg" alt="Tic Tac Toe project screenshot" loading="lazy">
+              <div class="project-card__mark" aria-hidden="true">DP</div>
               <div>
-                <h3>Tic Tac Toe</h3>
-                <p>Game logic, state handling, and interactive JavaScript UI.</p>
-                <a href="https://nnabdelshahid.github.io/Sonic-Tic-Tac-Toe/" target="_blank" rel="noopener">Live demo</a>
+                <p class="card-kicker">Infrastructure · In development</p>
+                <h3>DeploymentPlatform</h3>
+                <p>FastAPI control plane for health-gated deployment lifecycles, encrypted secrets, provider adapters, cost approval, logs, and usage estimates.</p>
+                <a href="DeploymentPlatform/">Read the case study</a>
               </div>
             </article>
             <article class="project-card">
-              <img src="images/portfolio/gallery/g-diceroller.jpg" alt="Dice Roller project screenshot" loading="lazy">
+              <div class="project-card__mark" aria-hidden="true">67%</div>
               <div>
-                <h3>Dice Roller</h3>
-                <p>Interactive browser app with events, visual feedback, and simple history.</p>
-                <a href="https://dicerollin.netlify.app/" target="_blank" rel="noopener">Live demo</a>
+                <p class="card-kicker">Developer productivity</p>
+                <h3>API and Database Automation Workbench</h3>
+                <p>Reusable Postman/Newman and MongoDB workflows reduced recurring validation from about 30 minutes to about 10 minutes.</p>
+                <a href="API-MongoQuery-Prompts/">Read the public case study</a>
               </div>
             </article>
             <article class="project-card">
-              <img src="images/portfolio/gallery/g-cat.jpg" alt="Treasure Hunt project screenshot" loading="lazy">
+              <div class="project-card__mark" aria-hidden="true">ASL</div>
               <div>
-                <h3>Treasure Hunt</h3>
-                <p>Small game prototype focused on UI state, feedback, and iteration.</p>
-                <a href="https://cat-treasure-hunt.netlify.app/" target="_blank" rel="noopener">Live demo</a>
+                <p class="card-kicker">Accessibility prototype</p>
+                <h3>ASL Communication Aid</h3>
+                <p>React browser prototype using MediaPipe hand landmarks for limited, local recognition and avatar-based practice.</p>
+                <a href="https://github.com/nnabdelshahid/asl-communication-aid" target="_blank" rel="noopener">View public repository</a>
               </div>
             </article>
             <article class="project-card">
-              <img src="images/portfolio/gallery/g-magicball.jpg" alt="Magic Ball project screenshot" loading="lazy">
+              <div class="project-card__mark" aria-hidden="true">CT</div>
               <div>
-                <h3>Magic Ball</h3>
-                <p>Question-and-answer app with form handling, result history, and responsive UI.</p>
-                <a href="https://nnabdelshahid.github.io/Magic-Ball/" target="_blank" rel="noopener">Live demo</a>
+                <p class="card-kicker">Deterministic operations · Private source</p>
+                <h3>Continuum</h3>
+                <p>Python orchestration framework for replayable, policy-gated engineering workflows with audit evidence and tamper-evident run bundles.</p>
+                <a href="Continuum/">Read the case study</a>
               </div>
             </article>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section project-section" id="products">
+      <div class="page-grid">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Commercial products</p>
+            <h2>Focused product work with honest maturity and access labels.</h2>
+          </div>
+          <p>These products are presented as private development, early access, or professional services. No page claims active billing, finished marketplace integrations, customers, revenue, or company scale.</p>
+        </div>
+        <div class="project-stack" aria-label="Commercial product case studies">
+          <article class="project-card">
+            <div class="project-card__mark" aria-hidden="true">SF</div>
+            <div><p class="card-kicker">SaaS candidate · Private development</p><h3>SellFuse</h3><p>Seller workflow for item intake, evidence-aware listing preparation, cross-marketplace handoffs, and coordinated sold-item follow-up.</p><a href="SellFuse/">Product overview</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__mark" aria-hidden="true">BF</div>
+            <div><p class="card-kicker">Buyer workspace · Product prototype</p><h3>BuyFuse</h3><p>A private buyer workspace for saving items, source links, notes, and purchase status—designed as a distinct companion product.</p><a href="BuyFuse/">Product overview</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__mark" aria-hidden="true">CF</div>
+            <div><p class="card-kicker">Product family · Umbrella platform</p><h3>CenterFuse</h3><p>The parent experience and shared product-family architecture that connects SellFuse and BuyFuse while keeping their runtimes independent.</p><a href="CenterFuse/">Architecture overview</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-card__mark" aria-hidden="true">NS</div>
+            <div><p class="card-kicker">Professional studio · Pre-launch</p><h3>Nader Studio</h3><p>Custom software and AI engineering studio site with a self-hosted project-discovery workflow and a manual inquiry path.</p><a href="Nader-Studio/">Studio overview</a></div>
+          </article>
         </div>
       </div>
     </section>
@@ -331,6 +375,12 @@
           <article>
             <h3>Additional</h3>
             <div class="tag-list">
+              <span>Python</span>
+              <span>FastAPI</span>
+              <span>Docker</span>
+              <span>AI Agents</span>
+              <span>LLM Infrastructure</span>
+              <span>Ollama</span>
               <span>JavaScript</span>
               <span>React</span>
               <span>Node.js</span>
